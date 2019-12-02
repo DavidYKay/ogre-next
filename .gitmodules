@@ -1,0 +1,3 @@
+[submodule "subprojects/ogredeps"]
+	path = subprojects/ogredeps
+	url = git@github.com:FreesideInc/ogredeps.git

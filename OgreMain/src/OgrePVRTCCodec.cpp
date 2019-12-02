@@ -33,20 +33,21 @@ THE SOFTWARE.
 #include "OgreException.h"
 #include "OgreLogManager.h"
 #include "OgreBitwise.h"
+#include "OgreDataStream.h"
 
 #define FOURCC(c0, c1, c2, c3) (c0 | (c1 << 8) | (c2 << 16) | (c3 << 24))
 #define PVR_TEXTURE_FLAG_TYPE_MASK  0xff
 
 namespace Ogre {
-    
+
 #if OGRE_COMPILER == OGRE_COMPILER_MSVC
 #pragma pack (push, 1)
 #else
 #pragma pack (1)
 #endif
 
-    const uint32 PVR2_MAGIC = FOURCC('P', 'V', 'R', '!'); 
-    const uint32 PVR3_MAGIC = FOURCC('P', 'V', 'R', 3); 
+    const uint32 PVR2_MAGIC = FOURCC('P', 'V', 'R', '!');
+    const uint32 PVR3_MAGIC = FOURCC('P', 'V', 'R', 3);
 
     enum
     {
@@ -104,7 +105,7 @@ namespace Ogre {
         uint32 u32DataSize;
         uint8* Data;
     } PVRTCMetadata;
-    
+
 #if OGRE_COMPILER == OGRE_COMPILER_MSVC
 #pragma pack (pop)
 #else
@@ -139,11 +140,11 @@ namespace Ogre {
     //---------------------------------------------------------------------
     PVRTCCodec::PVRTCCodec():
         mType("pvr")
-    { 
+    {
     }
     //---------------------------------------------------------------------
     DataStreamPtr PVRTCCodec::encode(MemoryDataStreamPtr& input, Codec::CodecDataPtr& pData) const
-    {        
+    {
         OGRE_EXCEPT(Exception::ERR_NOT_IMPLEMENTED,
                     "PVRTC encoding not supported",
                     "PVRTCCodec::encode" ) ;
@@ -165,7 +166,7 @@ namespace Ogre {
         stream->seek(0);
 
         if (PVR2_MAGIC == headerV2.pvrTag)
-        {           
+        {
             return decodeV2(stream);
         }
 
@@ -179,11 +180,11 @@ namespace Ogre {
             return decodeV3(stream);
         }
 
-        
+
         OGRE_EXCEPT(Exception::ERR_INVALIDPARAMS,
                         "This is not a PVR2 / PVR3 file!", "PVRTCCodec::decode");
     }
-    //---------------------------------------------------------------------    
+    //---------------------------------------------------------------------
     Codec::DecodeResult PVRTCCodec::decodeV2(DataStreamPtr& stream) const
     {
         PVRTCTexHeaderV2 header;
@@ -245,7 +246,7 @@ namespace Ogre {
 
         return ret;
     }
-    //---------------------------------------------------------------------    
+    //---------------------------------------------------------------------
     Codec::DecodeResult PVRTCCodec::decodeV3(DataStreamPtr& stream) const
     {
         PVRTCTexHeaderV3 header;
@@ -324,7 +325,7 @@ namespace Ogre {
 
         // Now deal with the data
         void *destPtr = imgData->box.data;
-        
+
         uint32 width = imgData->box.width;
         uint32 height = imgData->box.height;
         uint32 depth = imgData->box.depth;
@@ -364,19 +365,19 @@ namespace Ogre {
 
         return ret;
     }
-    //---------------------------------------------------------------------    
-    String PVRTCCodec::getType() const 
+    //---------------------------------------------------------------------
+    String PVRTCCodec::getType() const
     {
         return mType;
     }
-    //---------------------------------------------------------------------    
+    //---------------------------------------------------------------------
     void PVRTCCodec::flipEndian(void * pData, size_t size, size_t count)
     {
 #if OGRE_ENDIAN == OGRE_ENDIAN_BIG
 		Bitwise::bswapChunks(pData, size, count);
 #endif
     }
-    //---------------------------------------------------------------------    
+    //---------------------------------------------------------------------
     void PVRTCCodec::flipEndian(void * pData, size_t size)
     {
 #if OGRE_ENDIAN == OGRE_ENDIAN_BIG

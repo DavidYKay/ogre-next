@@ -44,7 +44,7 @@ THE SOFTWARE
 #endif
 
 #define generic _generic    // keyword for C++/CX
-#include <ft2build.h>
+#include <freetype2/ft2build.h>
 #include FT_FREETYPE_H
 #include FT_GLYPH_H
 #undef generic
@@ -161,7 +161,7 @@ namespace Ogre
         CodePointMap::const_iterator i = mCodePointMap.find(id);
         if (i == mCodePointMap.end())
         {
-            OGRE_EXCEPT(Exception::ERR_ITEM_NOT_FOUND, 
+            OGRE_EXCEPT(Exception::ERR_ITEM_NOT_FOUND,
                 "Code point " + StringConverter::toString(id) + " not found in font "
                 + mName, "Font::getGlyphInfo");
         }
@@ -445,7 +445,7 @@ namespace Ogre
                             *pDest++= 0xFF;
                         }
                         // Always use the greyscale value for alpha
-                        *pDest++= *buffer++; 
+                        *pDest++= *buffer++;
                     }
                 }
 
