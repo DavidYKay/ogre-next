@@ -30,6 +30,7 @@ HlmsPbsComponent  = library('HlmsPbsComponent', lib_src,
   dependencies: [
     OgreMainDep,
     HlmsCommonDep,
+    RapidJsonDep,
   ],
   include_directories : incdir)
 

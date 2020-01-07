@@ -44,6 +44,7 @@ THE SOFTWARE.
 #include "OgreDepthBuffer.h"
 #include "OgreTextureGpuListener.h"
 #include "OgreProfiler.h"
+#include <limits.h>
 
 #define TODO_notify_listeners
 

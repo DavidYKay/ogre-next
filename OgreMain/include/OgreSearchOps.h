@@ -53,6 +53,8 @@ struct _finddata_t
 #endif
 #define _A_SUBDIR 0x10  /* Subdirectory */
 
+#include <stdint.h>
+
 intptr_t _findfirst(const char *pattern, struct _finddata_t *data);
 int _findnext(intptr_t id, struct _finddata_t *data);
 int _findclose(intptr_t id);

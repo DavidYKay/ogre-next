@@ -29,15 +29,17 @@ THE SOFTWARE.
 // Emulate _findfirst, _findnext on non-Windows platforms
 #include "OgreSearchOps.h"
 #include <stdio.h>
-#include <dirent.h>
-#include <fnmatch.h>
 #include <sys/stat.h>
 #include <string.h>
 #include <stdlib.h>
 
+
 /* Win32 directory operations emulation */
 #if OGRE_PLATFORM != OGRE_PLATFORM_WIN32 && OGRE_PLATFORM != OGRE_PLATFORM_WINRT
-    
+
+#include <dirent.h>
+#include <fnmatch.h>
+
 struct _find_search_t
 {
     char *pattern;
@@ -46,7 +48,7 @@ struct _find_search_t
     int dirlen;
     DIR *dirfd;
 };
-        
+
 intptr_t _findfirst(const char *pattern, struct _finddata_t *data)
 {
     _find_search_t *fs = new _find_search_t;
@@ -148,7 +150,7 @@ int _findclose(intptr_t id)
 {
     int ret;
     _find_search_t *fs = reinterpret_cast<_find_search_t *>(id);
-    
+
     ret = fs->dirfd ? closedir (fs->dirfd) : 0;
     free (fs->pattern);
     free (fs->directory);

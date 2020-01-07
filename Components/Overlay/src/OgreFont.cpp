@@ -44,12 +44,12 @@ THE SOFTWARE
 #endif
 
 #define generic _generic    // keyword for C++/CX
-#include <freetype2/ft2build.h>
+// This is a workaround due to how we currently have freetype configured in Meson.
+//#include <freetype/ft2build.h>
+#include <ft2build.h>
 #include FT_FREETYPE_H
 #include FT_GLYPH_H
 #undef generic
-
-
 
 namespace Ogre
 {

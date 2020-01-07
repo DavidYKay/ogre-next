@@ -8,7 +8,7 @@ incdir = include_directories(
   'include',
 )
 
-HlmsCommon = static_library('HlmsPbsComponent', lib_src,
+HlmsCommon = static_library('HlmsCommonComponent', lib_src,
   link_with: [
     ],
   dependencies: [

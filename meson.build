@@ -19,9 +19,11 @@ add_project_arguments('-fcompare-debug-second', language: 'c')
 # zziplibDep = ogredeps_proj.target('zziplib')
 
 ogredeps_proj = subproject('ogredeps')
-zziplibDep  = ogredeps_proj.get_variable('zziplibDep')
-zlibDep     = ogredeps_proj.get_variable('zlibDep')
-freetypeDep = ogredeps_proj.get_variable('freetypeDep')
+# TODO: Standardize capitalization
+zziplibDep   = ogredeps_proj.get_variable('zziplibDep')
+zlibDep      = ogredeps_proj.get_variable('zlibDep')
+freetypeDep  = ogredeps_proj.get_variable('freetypeDep')
+RapidJsonDep = ogredeps_proj.get_variable('RapidJsonDep')
 
 subdir('OgreMain')
 subdir('RenderSystems')
