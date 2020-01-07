@@ -20,14 +20,23 @@ incdir = include_directories(
   'include',
 )
 
+common_deps = [
+  OgreMainDep,
+  HlmsUnlitComponentDep,
+  freetypeDep,
+]
+
+if host_machine.system() == 'windows'
+  deps = common_deps
+else
+  #deps = common_deps + dependency('freetype2')
+  deps = common_deps
+endif
+
 OverlayComponent  = library('OverlayComponent', lib_src,
   link_with: [
-    ],
-  dependencies: [
-    OgreMainDep,
-    HlmsUnlitComponentDep,
-    dependency('freetype2'),
   ],
+  dependencies: deps,
   include_directories : incdir)
 
 OverlayComponentDep = declare_dependency(link_with : OverlayComponent,

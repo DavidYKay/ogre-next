@@ -1,6 +1,6 @@
 cc = meson.get_compiler('cpp')
 
-lib_src = [
+common_src = [
   'src/Animation/OgreBone.cpp',
   'src/Animation/OgreSkeletonAnimManager.cpp',
   'src/Animation/OgreSkeletonAnimation.cpp',
@@ -38,11 +38,6 @@ lib_src = [
   # 'src/Emscripten/OgreConfigDialog.cpp',
   # 'src/Emscripten/OgreErrorDialog.cpp',
   # 'src/Emscripten/OgreTimer.cpp',
-  'src/GLX/GLX_backdrop.h',
-  'src/GLX/OgreConfigDialog.cpp',
-  'src/GLX/OgreErrorDialog.cpp',
-  'src/GLX/OgreFileSystemLayer.cpp',
-  'src/GLX/OgreTimer.cpp',
   'src/Hash/MurmurHash3.cpp',
   #'src/Math/Array/C/OgreArrayAabb.cpp',
   #'src/Math/Array/C/OgreArrayMatrix4.cpp',
@@ -293,10 +288,7 @@ lib_src = [
   'src/OgreWireBoundingBox.cpp',
   'src/OgreWorkQueue.cpp',
   'src/OgreZip.cpp',
-  'src/Threading/OgreBarrierPThreads.cpp',
   'src/Threading/OgreDefaultWorkQueueStandard.cpp',
-  'src/Threading/OgreLightweightMutexPThreads.cpp',
-  'src/Threading/OgreThreadsPThreads.cpp',
   'src/Threading/OgreWaitableEvent.cpp',
   'src/Vao/OgreAsyncTicket.cpp',
   'src/Vao/OgreBufferInterface.cpp',
@@ -320,6 +312,36 @@ lib_src = [
   'src/stbi/stb_image.c',
   'src/stbi/stb_image.h',
   'src/stbi/stb_image_write.h',
+]
+
+linux_src = common_src + [
+  # Linux
+  'src/GLX/GLX_backdrop.h',
+  'src/GLX/OgreConfigDialog.cpp',
+  'src/GLX/OgreErrorDialog.cpp',
+  'src/GLX/OgreFileSystemLayer.cpp',
+  'src/GLX/OgreTimer.cpp',
+  'src/Threading/OgreLightweightMutexPThreads.cpp',
+  'src/Threading/OgreThreadsPThreads.cpp',
+  'src/Threading/OgreBarrierPThreads.cpp',
+]
+
+win_src = common_src + [
+  'src/WIN32/OgreConfigDialog.cpp',
+  #'src/WIN32/OgreConfigDialogWinRT.cpp',
+  'src/WIN32/OgreErrorDialog.cpp',
+  #'src/WIN32/OgreErrorDialogWinRT.cpp',
+  'src/WIN32/OgreFileSystemLayer.cpp',
+  'src/WIN32/OgreMinGWSupport.cpp',
+  'src/WIN32/OgreOptimisedUtilDirectXMath.cpp',
+  'src/WIN32/OgreTimer.cpp',
+  #'src/WIN32/OgreWin32Resources.rc',
+  #'src/WIN32/ogre.ico',
+  #'src/WIN32/ogrelogo.bmp',
+  #'src/WIN32/resource.h',
+  'src/Threading/OgreBarrierWin.cpp',
+  'src/Threading/OgreLightweightMutexWin.cpp',
+  'src/Threading/OgreThreadsWin.cpp',
 ]
 
 # Threading Building Blocks
@@ -357,22 +379,6 @@ lib_src = [
 # src/NaCl/OgreFileSystemLayer.cpp
 # src/NaCl/OgreTimer.cpp
 
-# Win32
-# src/WIN32/OgreConfigDialog.cpp
-# src/WIN32/OgreConfigDialogWinRT.cpp
-# src/WIN32/OgreErrorDialog.cpp
-# src/WIN32/OgreErrorDialogWinRT.cpp
-# src/WIN32/OgreFileSystemLayer.cpp
-# src/WIN32/OgreMinGWSupport.cpp
-# src/WIN32/OgreOptimisedUtilDirectXMath.cpp
-# src/WIN32/OgreTimer.cpp
-# src/WIN32/OgreWin32Resources.rc
-# src/WIN32/ogre.ico
-# src/WIN32/ogrelogo.bmp
-# src/WIN32/resource.h
-  # 'src/Threading/OgreBarrierWin.cpp',
-  # 'src/Threading/OgreLightweightMutexWin.cpp',
-  # 'src/Threading/OgreThreadsWin.cpp',
 
 # iOS
 # src/iOS/OgreConfigDialog.cpp
@@ -388,7 +394,7 @@ lib_src = [
 # 'src/OSX/OgreTimer.cpp',
 # 'src/OSX/macUtils.mm',
 
-incdir = include_directories(
+common_inc = [
 'include',
 'include/Animation',
 'include/CommandBuffer',
@@ -419,12 +425,24 @@ incdir = include_directories(
 'include/Vao',
 'include/debugbreak',
 #'include/gtk',
-# TODO: For Windows support, we're going to have to generate this. See OgreBuildSettings.h for more info.
-'../hardcoded/include',
 # TODO: Technically, we should probably invoke ogredeps as its own project. But this include path should be good enough for now.
 # TODO: We should also delete the symlink once we move this over.
 '../subprojects/ogredeps/src/rapidjson',
-)
+]
+
+if host_machine.system() == 'windows'
+  incdir = include_directories(common_inc + [
+    'include/WIN32',
+    '../hardcoded/include/win32',
+  ])
+else
+  incdir = include_directories(common_inc + [
+    '../hardcoded/include/linux',
+  ])
+endif
+
+# warning('getting host system...')
+# warning(host_machine.system())
 
 # 'include/Android',
 # 'include/Deprecated',
@@ -433,25 +451,35 @@ incdir = include_directories(
 # 'include/OSX/nib',
 # 'include/OSX/nib/config.nib',
 # 'include/OSX/nib/main.nib',
-# 'include/WIN32',
 
-gtkdep = dependency('gtk+-3.0')
+#gtkdep = dependency('gtk+-3.0')
+if host_machine.system() == 'windows'
+  deps = [
+      zziplibDep,
+      zlibDep,
+  ]
+else
+  deps = [
+      dependency('xrandr'),
+      cc.find_library('Xaw'),
+      cc.find_library('Xt'),
+      cc.find_library('X11'),
+      cc.find_library('dl'),
+      #gtkdep,
+      dependency('zlib'),
+      cc.find_library('pthread'),
+      cc.find_library('zzip'),
+  ]
+endif
 
-OgreMain  = library('OgreMain', lib_src,
+# TODO: Bifurcate this such that we intelligently use linux / win based on host machine
+# warning(build_machine.system())
+# warning(host_machine.system())
+OgreMain  = library('OgreMain', win_src,
   link_with: [
     #mccarthycpp,
     ],
-  dependencies: [
-    gtkdep,
-    dependency('zlib'),
-    dependency('xrandr'),
-    cc.find_library('Xaw'),
-    cc.find_library('Xt'),
-    cc.find_library('X11'),
-    cc.find_library('dl'),
-    cc.find_library('pthread'),
-    cc.find_library('zzip'),
-  ],
+  dependencies: deps,
   include_directories : incdir)
 
 OgreMainDep = declare_dependency(link_with : OgreMain,

@@ -1,6 +1,6 @@
 cc = meson.get_compiler('cpp')
 
-lib_src = [
+common_src = [
   'src/GLSL/OgreGLSLExtSupport.cpp',
   'src/GLSL/OgreGLSLMonolithicProgram.cpp',
   'src/GLSL/OgreGLSLMonolithicProgramManager.cpp',
@@ -45,25 +45,7 @@ lib_src = [
   'src/Vao/OgreGL3PlusUavBufferPacked.cpp',
   'src/Vao/OgreGL3PlusVaoManager.cpp',
   'src/gl3w.cpp',
-  'src/windowing/GLX/OgreGL3PlusUtil.h',
-  'src/windowing/GLX/OgreGLXContext.cpp',
-  'src/windowing/GLX/OgreGLXGLSupport.cpp',
-  'src/windowing/GLX/OgreGLXWindow.cpp',
 ]
-
-#'src/Deprecated/OgreGL3PlusDepthBuffer.cpp',
-#'src/Deprecated/OgreGL3PlusDepthTexture.cpp',
-#'src/Deprecated/OgreGL3PlusFBOMultiRenderTarget.cpp',
-#'src/Deprecated/OgreGL3PlusFBORenderTexture.cpp',
-#'src/Deprecated/OgreGL3PlusFrameBufferObject.cpp',
-#'src/Deprecated/OgreGL3PlusHardwarePixelBuffer.cpp',
-#'src/Deprecated/OgreGL3PlusNullTexture.cpp',
-#'src/Deprecated/OgreGL3PlusPixelFormat.cpp',
-#'src/Deprecated/OgreGL3PlusRenderTexture.cpp',
-#'src/Deprecated/OgreGL3PlusRenderToVertexBuffer.cpp',
-#'src/Deprecated/OgreGL3PlusTexture.cpp',
-#'src/Deprecated/OgreGL3PlusTextureBuffer.cpp',
-#'src/Deprecated/OgreGL3PlusTextureManager.cpp',
 #'src/windowing/OSX/OgreGL3PlusUtil.h',
 #'src/windowing/OSX/OgreOSXCocoaContext.mm',
 #'src/windowing/OSX/OgreOSXCocoaView.mm',
@@ -76,43 +58,65 @@ lib_src = [
 #'src/windowing/gtk/OgreGL3PlusUtil.h',
 #'src/windowing/gtk/OgreGTKGLSupport.cpp',
 #'src/windowing/gtk/OgreGTKWindow.cpp',
-#'src/windowing/win32/OgreGL3PlusUtil.h',
-#'src/windowing/win32/OgreWin32Context.cpp',
-#'src/windowing/win32/OgreWin32GLSupport.cpp',
-#'src/windowing/win32/OgreWin32Window.cpp',
 
-incdir = include_directories(
+common_inc = [
   'include',
   'include/windowing',
-  'include/windowing/GLX',
-  # 'include/windowing/SDL',
   'include/Vao',
   'include/GLSL',
   'include/GL',
 
-  # Add Windows support here
-  'src/windowing/GLX',
+]
 
-  #'../../OgreMain/include',
-  #'../../hardcoded/include',
-)
+common_deps = [
+    OgreMainDep
+]
 
-#'include/Deprecated',
-#'include/windowing/gtk',
-#'include/windowing/win32',
+
+if host_machine.system() == 'windows'
+  lib_src = common_src + [
+    'src/windowing/win32/OgreGL3PlusUtil.h',
+    'src/windowing/win32/OgreWin32Context.cpp',
+    'src/windowing/win32/OgreWin32GLSupport.cpp',
+    'src/windowing/win32/OgreWin32Window.cpp',
+  ]
+  inc = include_directories(common_inc + [
+    'include/windowing/win32',
+    'src/windowing/win32',
+  ])
+  #deps = common_deps + cc.find_library('opengl32')
+  deps = [
+      OgreMainDep,
+      cc.find_library('opengl32'),
+  ]
+else
+  lib_src = [
+    'src/windowing/GLX/OgreGL3PlusUtil.h',
+    'src/windowing/GLX/OgreGLXContext.cpp',
+    'src/windowing/GLX/OgreGLXGLSupport.cpp',
+    'src/windowing/GLX/OgreGLXWindow.cpp',
+  ]
+  inc = include_directories(common_inc + [
+    'include/windowing/GLX',
+    'src/windowing/GLX',
+  ])
+  deps = common_deps + [
+    dependency('xrandr'),
+    cc.find_library('X11'),
+    cc.find_library('dl'),
+    cc.find_library('GL'),
+  ]
+endif
+
+#'include/windowing/SDL',
 #'include/windowing/OSX',
+#'include/windowing/gtk',
 
 # gtkdep = dependency('gtk+-3.0')
 
 RenderSystemGL3Plus  = library('RenderSystemGL3Plus', lib_src,
   link_with: [
     ],
-  dependencies: [
-    dependency('xrandr'),
-    cc.find_library('dl'),
-    cc.find_library('GL'),
-    cc.find_library('X11'),
-    OgreMainDep
-  ],
-  include_directories : incdir)
+  dependencies: deps,
+  include_directories : inc)
 
