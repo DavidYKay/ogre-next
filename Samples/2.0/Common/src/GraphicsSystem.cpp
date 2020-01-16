@@ -36,7 +36,7 @@
 #include "OgreLogManager.h"
 
 #if OGRE_USE_SDL2
-    #include <SDL_syswm.h>
+    #include <SDL2/SDL_syswm.h>
 #endif
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_APPLE || OGRE_PLATFORM == OGRE_PLATFORM_APPLE_IOS
@@ -700,7 +700,7 @@ namespace Demo
         Ogre::StringVector::const_iterator libraryFolderPathEn;
 
         Ogre::ArchiveManager &archiveManager = Ogre::ArchiveManager::getSingleton();
-        
+
         {
             //Create & Register HlmsUnlit
             //Get the path to all the subdirectories used by HlmsUnlit

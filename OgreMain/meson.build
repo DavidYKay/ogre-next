@@ -475,7 +475,7 @@ endif
 # TODO: Bifurcate this such that we intelligently use linux / win based on host machine
 # warning(build_machine.system())
 # warning(host_machine.system())
-OgreMain  = library('OgreMain', win_src,
+OgreMain  = shared_library('OgreMain', win_src,
   link_with: [
     #mccarthycpp,
     ],

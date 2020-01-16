@@ -20,7 +20,7 @@
 #include "OgreOverlaySystem.h"
 
 #if OGRE_USE_SDL2
-    #include <SDL_syswm.h>
+    #include <SDL2/SDL_syswm.h>
 #endif
 
 namespace Demo

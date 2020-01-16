@@ -15,6 +15,7 @@
 
 #if OGRE_USE_SDL2
     #include <SDL.h>
+    // #include <SDL2/SDL.h>
 #endif
 
 namespace Demo

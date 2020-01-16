@@ -112,7 +112,8 @@ namespace Demo
 
     #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
         static INT WINAPI mainAppSingleThreaded( HINSTANCE hInst, HINSTANCE hPrevInstance,
-                                                 LPSTR strCmdLine, INT nCmdShow );
+                                                  LPSTR strCmdLine, INT nCmdShow );
+        //static int mainAppSingleThreaded( int argc, const char *argv[] );
     #else
         static int mainAppSingleThreaded( int argc, const char *argv[] );
     #endif
@@ -126,4 +127,3 @@ namespace Demo
 }
 
 #endif
-
