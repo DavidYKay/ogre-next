@@ -1,0 +1,48 @@
+package(default_visibility = ["//visibility:public"])
+
+cc_library(
+    name = "Pbs",
+    srcs = [
+      'src/OgreHlmsJsonPbs.cpp',
+      'src/InstantRadiosity/OgreInstantRadiosity.cpp',
+      'src/Cubemaps/OgreParallaxCorrectedCubemapBase.cpp',
+      'src/Cubemaps/OgreParallaxCorrectedCubemap.cpp',
+      'src/Cubemaps/OgreCubemapProbe.cpp',
+      'src/Cubemaps/OgreParallaxCorrectedCubemapAuto.cpp',
+      'src/OgreHlmsPbsDatablock.cpp.inc',
+      'src/OgreHlmsPbsDatablock.cpp',
+      'src/OgreIrradianceVolume.cpp',
+      'src/Vct/OgreVctMaterial.cpp',
+      'src/Vct/OgreVctVoxelizer.cpp',
+      'src/Vct/OgreVoxelVisualizer.cpp',
+      'src/Vct/OgreVctLighting.cpp',
+      'src/OgreHlmsPbs.cpp',
+    ],
+    hdrs = [
+      'include/InstantRadiosity/OgreInstantRadiosity.h',
+      'include/OgreHlmsPbs.h',
+      'include/OgreHlmsPbsPrerequisites.h',
+      'include/OgreHlmsPbsDatablock.h',
+      'include/Cubemaps/OgreParallaxCorrectedCubemapBase.h',
+      'include/Cubemaps/OgreParallaxCorrectedCubemapAuto.h',
+      'include/Cubemaps/OgreCubemapProbe.h',
+      'include/Cubemaps/OgreParallaxCorrectedCubemap.h',
+      'include/OgreHlmsJsonPbs.h',
+      'include/Vct/OgreVctMaterial.h',
+      'include/Vct/OgreVoxelVisualizer.h',
+      'include/Vct/OgreVctLighting.h',
+      'include/Vct/OgreVctVoxelizer.h',
+      'include/OgreIrradianceVolume.h',
+    ],
+    copts = [
+        "-Isubprojects/ogre2/Components/Hlms/Pbs/include",
+        "-Isubprojects/ogre2/Components/Hlms/Common/include",
+        "-Isubprojects/ogre2/OgreMain/include",
+        "-Isubprojects/ogredeps/src/rapidjson",
+    ],
+  deps = [
+    "//subprojects/ogredeps/src/rapidjson",
+    '//subprojects/ogre2/Components/Hlms/Common',
+    '//subprojects/ogre2/OgreMain',
+  ],
+)

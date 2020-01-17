@@ -7,6 +7,8 @@ cc_library(
     ],
     hdrs = [
       'include/OgreHlmsBufferManager.h',
+      'include/OgreHlmsTextureBaseClass.h',
+      'include/OgreHlmsTextureBaseClass.inl',
     ],
     copts = [
         "-Isubprojects/ogre2/Components/Hlms/Common/include",
