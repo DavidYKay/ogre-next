@@ -6,11 +6,13 @@ project('ogre2', 'cpp', 'c',
 
 add_project_arguments('-D_DEBUG=1', language : 'c')
 add_project_arguments('-D_DEBUG=1', language : 'cpp')
-add_project_arguments('-msse4.1', language: 'cpp')
-add_project_arguments('-w', language: 'cpp')
-add_project_arguments('-w', language: 'c')
-add_project_arguments('-fcompare-debug-second', language: 'cpp')
-add_project_arguments('-fcompare-debug-second', language: 'c')
+
+# GCC
+# add_project_arguments('-w', language: 'cpp')
+# add_project_arguments('-w', language: 'c')
+# add_project_arguments('-msse4.1', language: 'cpp')
+# add_project_arguments('-fcompare-debug-second', language: 'cpp')
+# add_project_arguments('-fcompare-debug-second', language: 'c')
 
 
 # cmake = import('cmake')
@@ -28,4 +30,4 @@ RapidJsonDep = ogredeps_proj.get_variable('RapidJsonDep')
 subdir('OgreMain')
 subdir('RenderSystems')
 subdir('Components')
-# subdir('Samples')
+#subdir('Samples')

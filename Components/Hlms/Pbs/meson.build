@@ -24,7 +24,7 @@ incdir = include_directories(
   'include/Vct',
 )
 
-HlmsPbsComponent  = library('HlmsPbsComponent', lib_src,
+HlmsPbsComponent  = static_library('HlmsPbsComponent', lib_src,
   link_with: [
     ],
   dependencies: [

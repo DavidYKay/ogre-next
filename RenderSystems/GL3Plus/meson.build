@@ -114,9 +114,9 @@ endif
 
 # gtkdep = dependency('gtk+-3.0')
 
-RenderSystemGL3Plus  = library('RenderSystemGL3Plus', lib_src,
+RenderSystemGL3Plus  = shared_library('RenderSystemGL3Plus', lib_src,
   link_with: [
-    ],
+  ],
   dependencies: deps,
   include_directories : inc)
 

@@ -455,8 +455,8 @@ endif
 #gtkdep = dependency('gtk+-3.0')
 if host_machine.system() == 'windows'
   deps = [
-      zziplibDep,
-      zlibDep,
+      #zziplibDep,
+      #zlibDep,
   ]
 else
   deps = [
@@ -475,7 +475,7 @@ endif
 # TODO: Bifurcate this such that we intelligently use linux / win based on host machine
 # warning(build_machine.system())
 # warning(host_machine.system())
-OgreMain  = library('OgreMain', win_src,
+OgreMain  = static_library('OgreMain', win_src,
   link_with: [
     #mccarthycpp,
     ],

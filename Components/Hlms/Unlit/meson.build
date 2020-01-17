@@ -13,7 +13,7 @@ incdir = include_directories(
   'include',
 )
 
-HlmsUnlitComponent  = library('HlmsUnlitComponent', lib_src,
+HlmsUnlitComponent  = static_library('HlmsUnlitComponent', lib_src,
   link_with: [
     ],
   dependencies: [
