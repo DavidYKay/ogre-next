@@ -552,6 +552,7 @@ cc_library(
    'include/OgreBitset.h',
    'include/OgreBitwise.h',
    'include/OgreBlendMode.h',
+   # TODO: Generate this per-platform
    'include/OgreBuildSettings.h',
    'include/OgreCamera.h',
    'include/OgreCodec.h',
@@ -864,6 +865,7 @@ cc_library(
    'include/debugbreak/debugbreak.h',
    'include/gtk/OgreConfigDialogImp.h',
    'include/gtk/OgreErrorDialogImp.h',
+   #'../hardcoded/OgreBuildSettings.h',
    # 'include/iOS/OgreConfigDialogImp.h',
    # 'include/iOS/OgreErrorDialogImp.h',
    # 'include/iOS/OgreOSXCocoaTouchView.h',

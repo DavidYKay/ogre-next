@@ -105,8 +105,6 @@
 
 #define OGRE_IDSTRING_ALWAYS_READABLE 1
 
-#define OGRE_NO_FREEIMAGE 1
-
 #define OGRE_USE_SDL2 0
 
 // This may hamper performance

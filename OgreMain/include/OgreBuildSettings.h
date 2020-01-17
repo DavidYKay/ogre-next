@@ -1,0 +1,1 @@
+../../hardcoded/include/OgreBuildSettings.h
