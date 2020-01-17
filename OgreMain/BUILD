@@ -872,10 +872,14 @@ cc_library(
    # 'include/iOS/OgreTimerImp.h',
    # 'include/iOS/macUtils.h',
     ],
-    copts = ["-Isubprojects/ogre2/OgreMain/include"],
+    copts = [
+        "-Isubprojects/ogre2/OgreMain/include",
+        "-Isubprojects/ogredeps/src/rapidjson",
+    ],
     deps = [
         #"include"
         #"//subprojects/ogre2/OgreMain/include"
+        "//subprojects/ogredeps/src/rapidjson"
     ],
     )
 
