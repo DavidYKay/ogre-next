@@ -10,7 +10,6 @@ cc_library(
       'src/OgreHlmsJsonUnlit.cpp',
     ],
     hdrs = [
-      #'../Common/include/OgreHlmsTextureBaseClass.h',
       'src/OgreHlmsUnlitDatablock.cpp.inc',
       'include/OgreHlmsJsonUnlit.h',
       'include/OgreHlmsUnlitDatablock.h',
@@ -30,7 +29,5 @@ cc_library(
     '//subprojects/ogre2/Components/Hlms/Common',
     '//subprojects/ogre2/OgreMain',
     "//subprojects/ogredeps/src/rapidjson",
-    # OgreMainDep,
-    # HlmsCommonDep,
   ],
   )
