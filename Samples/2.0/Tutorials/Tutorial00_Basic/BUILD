@@ -16,13 +16,6 @@ cc_binary(
     ],
     linkopts = [
         #"-L/usr/lib64",
-        "-lX11",
-        "-lXt",
-        "-lXaw",
-        "-lpthread",
-        "-lzzip",
-        "-ldl",
-        "-lXrandr",
     ],
     deps = [
       '//subprojects/ogre2/OgreMain',

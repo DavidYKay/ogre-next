@@ -876,6 +876,13 @@ cc_library(
     ],
     linkopts = [
         "-lfreeimage",
+        "-lX11",
+        "-lXt",
+        "-lXaw",
+        "-lpthread",
+        "-lzzip",
+        "-ldl",
+        "-lXrandr",
     ],
     deps = [
         "//subprojects/ogredeps/src/rapidjson"
