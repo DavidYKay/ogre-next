@@ -1,0 +1,48 @@
+package(default_visibility = ["//visibility:public"])
+
+cc_library(
+    name = "Overlay",
+    srcs = [
+      'src/OgreTextAreaOverlayElement.cpp',
+      'src/OgreBorderPanelOverlayElement.cpp',
+      'src/OgreOverlayElement.cpp',
+      'src/OgreOverlayContainer.cpp',
+      'src/OgreOverlayElementCommands.cpp',
+      'src/OgreOverlayManager.cpp',
+      'src/OgreFontManager.cpp',
+      'src/OgreOverlayProfileSessionListener.cpp',
+      'src/OgreOverlayElementFactory.cpp',
+      'src/OgreFont.cpp',
+      'src/OgreOverlaySystem.cpp',
+      'src/OgreOverlay.cpp',
+      'src/OgrePanelOverlayElement.cpp',
+    ],
+    hdrs = [
+      'include/OgreOverlayProfileSessionListener.h',
+      'include/OgreFont.h',
+      'include/OgreOverlay.h',
+      'include/OgreOverlayElement.h',
+      'include/OgreBorderPanelOverlayElement.h',
+      'include/OgreFontManager.h',
+      'include/OgreOverlaySystem.h',
+      'include/OgreOverlayElementCommands.h',
+      'include/OgreOverlayManager.h',
+      'include/OgrePanelOverlayElement.h',
+      'include/OgreTextAreaOverlayElement.h',
+      'include/OgreOverlayContainer.h',
+      'include/OgreOverlayElementFactory.h',
+      'include/OgreOverlayPrerequisites.h',
+    ],
+    copts = [
+        "-Isubprojects/ogre2/Components/Overlay/include",
+        "-Isubprojects/ogre2/Components/Hlms/Common/include",
+        "-Isubprojects/ogre2/Components/Hlms/Unlit/include",
+        "-Isubprojects/ogre2/OgreMain/include",
+        "-isystem/usr/include/freetype2",
+    ],
+    deps = [
+      '//subprojects/ogre2/OgreMain',
+      '//subprojects/ogre2/Components/Hlms/Unlit',
+      #dependency('freetype2'),
+    ],
+  )
