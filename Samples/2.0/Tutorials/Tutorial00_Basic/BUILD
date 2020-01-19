@@ -8,12 +8,10 @@ cc_binary(
         'Tutorial00_Basic.cpp'
     ],
     copts = [
-        #"-Isubprojects/ogre2/Samples/2.0/Common/include",
         "-Isubprojects/ogre2/OgreMain/include",
         "-Isubprojects/ogre2/Components/Hlms/Common/include",
         "-Isubprojects/ogre2/Components/Hlms/Unlit/include",
         "-Isubprojects/ogre2/Components/Hlms/Pbs/include",
-        #"-isystem/usr/include/freetype2",
         "-isystem/usr/include/SDL2",
     ],
     linkopts = [
@@ -24,9 +22,7 @@ cc_binary(
         "-lpthread",
         "-lzzip",
         "-ldl",
-        #"-L"
         "-lXrandr",
-        #"-lxrandr",
     ],
     deps = [
       '//subprojects/ogre2/OgreMain',

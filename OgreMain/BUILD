@@ -1,7 +1,5 @@
 package(default_visibility = ["//visibility:public"])
 
-#load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library", "cc_test")
-
 cc_library(
     name = "OgreMain",
     srcs = [
@@ -123,7 +121,7 @@ cc_library(
       'src/OgreForward3D.cpp',
       'src/OgreForwardClustered.cpp',
       'src/OgreForwardPlusBase.cpp',
-      #'src/OgreFreeImageCodec2.cpp',
+      'src/OgreFreeImageCodec2.cpp',
       'src/OgreFrustum.cpp',
       'src/OgreGpuProgram.cpp',
       'src/OgreGpuProgramManager.cpp',
@@ -876,14 +874,10 @@ cc_library(
         "-Isubprojects/ogre2/OgreMain/include",
         "-Isubprojects/ogredeps/src/rapidjson",
     ],
+    linkopts = [
+        "-lfreeimage",
+    ],
     deps = [
-        #"include"
-        #"//subprojects/ogre2/OgreMain/include"
         "//subprojects/ogredeps/src/rapidjson"
     ],
     )
-
-#filegroup(
-#    name = "srcs",
-#    srcs = glob(["**"]),
-#    )
