@@ -16,6 +16,18 @@ cc_binary(
         #"-isystem/usr/include/freetype2",
         "-isystem/usr/include/SDL2",
     ],
+    linkopts = [
+        #"-L/usr/lib64",
+        "-lX11",
+        "-lXt",
+        "-lXaw",
+        "-lpthread",
+        "-lzzip",
+        "-ldl",
+        #"-L"
+        "-lXrandr",
+        #"-lxrandr",
+    ],
     deps = [
       '//subprojects/ogre2/OgreMain',
       '//subprojects/ogre2/Components/Hlms/Unlit',
