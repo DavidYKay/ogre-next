@@ -105,7 +105,7 @@
 
 #define OGRE_IDSTRING_ALWAYS_READABLE 1
 
-#define OGRE_USE_SDL2 0
+#define OGRE_USE_SDL2 1
 
 // This may hamper performance
 #define OGRE_DEBUG_MODE OGRE_DEBUG_MEDIUM

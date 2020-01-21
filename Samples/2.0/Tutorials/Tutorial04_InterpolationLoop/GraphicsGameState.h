@@ -1,4 +1,3 @@
-
 #ifndef _Demo_GraphicsGameState_H_
 #define _Demo_GraphicsGameState_H_
 

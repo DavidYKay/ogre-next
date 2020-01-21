@@ -35,4 +35,3 @@ cc_binary(
       #dependency('SDL2'),
     ],
   )
-
