@@ -33,7 +33,7 @@ else
   deps = common_deps
 endif
 
-OverlayComponent  = library('OverlayComponent', lib_src,
+OverlayComponent  = static_library('OverlayComponent', lib_src,
   link_with: [
   ],
   dependencies: deps,

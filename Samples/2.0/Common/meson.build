@@ -77,6 +77,8 @@ sdlDepVCX64 = declare_dependency(
       'C:/Users/David/Downloads/SDL2-devel-2.0.10-VC/SDL2-2.0.10/lib/x64'
     ])],
   include_directories: include_directories(
+      #'C:/Users/David/Downloads/SDL2-devel-2.0.10-VC/SDL2-2.0.10/include/SDL2'
+      'C:/Users/David/Downloads/SDL2-devel-2.0.10-VC/SDL2-2.0.10/include',
       'C:/Users/David/Downloads/SDL2-devel-2.0.10-VC/SDL2-2.0.10/include/SDL2'
   )
 )

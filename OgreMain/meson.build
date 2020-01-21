@@ -328,11 +328,11 @@ linux_src = common_src + [
 
 win_src = common_src + [
   'src/WIN32/OgreConfigDialog.cpp',
-  #'src/WIN32/OgreConfigDialogWinRT.cpp',
   'src/WIN32/OgreErrorDialog.cpp',
+  #'src/WIN32/OgreConfigDialogWinRT.cpp',
   #'src/WIN32/OgreErrorDialogWinRT.cpp',
   'src/WIN32/OgreFileSystemLayer.cpp',
-  'src/WIN32/OgreMinGWSupport.cpp',
+  #'src/WIN32/OgreMinGWSupport.cpp', # This was clashing with MSVC compiler
   'src/WIN32/OgreOptimisedUtilDirectXMath.cpp',
   'src/WIN32/OgreTimer.cpp',
   #'src/WIN32/OgreWin32Resources.rc',
@@ -475,7 +475,7 @@ endif
 # TODO: Bifurcate this such that we intelligently use linux / win based on host machine
 # warning(build_machine.system())
 # warning(host_machine.system())
-OgreMain  = shared_library('OgreMain', win_src,
+OgreMain  = static_library('OgreMain', win_src,
   link_with: [
     #mccarthycpp,
     ],

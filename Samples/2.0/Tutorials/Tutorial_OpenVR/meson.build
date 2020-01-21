@@ -18,8 +18,9 @@ incdir = include_directories(
 #    '../../../../../libopenvr_api/headers',
 #    )
 #)
-#
+
 #Tutorial_OpenVR  = executable('Tutorial_OpenVR', src,
+#  gui_app: true,
 #  link_with: [
 #    ],
 #  dependencies: [

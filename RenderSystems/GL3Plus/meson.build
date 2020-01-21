@@ -65,13 +65,11 @@ common_inc = [
   'include/Vao',
   'include/GLSL',
   'include/GL',
-
 ]
 
 common_deps = [
     OgreMainDep
 ]
-
 
 if host_machine.system() == 'windows'
   lib_src = common_src + [
@@ -84,7 +82,6 @@ if host_machine.system() == 'windows'
     'include/windowing/win32',
     'src/windowing/win32',
   ])
-  #deps = common_deps + cc.find_library('opengl32')
   deps = [
       OgreMainDep,
       cc.find_library('opengl32'),

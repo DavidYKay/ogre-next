@@ -9,6 +9,7 @@ incdir = include_directories(
 )
 
 Tutorial00Basic  = executable('Tutorial00Basic', src,
+  gui_app: true,
   link_with: [
     ],
   dependencies: [

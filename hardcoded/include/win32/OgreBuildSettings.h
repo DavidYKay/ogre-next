@@ -3,7 +3,7 @@
 
 // TODO: Eventually, we should generate this using Meson's configure_file functionality.
 
-/* #undef OGRE_STATIC_LIB */
+#define OGRE_STATIC_LIB 1
 #define OGRE_DEBUG_LEVEL_DEBUG 3
 #define OGRE_DEBUG_LEVEL_RELEASE 0
 

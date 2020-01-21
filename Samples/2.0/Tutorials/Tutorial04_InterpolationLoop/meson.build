@@ -34,6 +34,7 @@ incdir = include_directories(
 )
 
 Tutorial04InterpolationLoop  = executable('Tutorial04InterpolationLoop', src + lib_src,
+  gui_app: true,
   link_with: [
     ],
   dependencies: [
