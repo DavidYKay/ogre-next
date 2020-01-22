@@ -83,9 +83,8 @@ cc_library(
         "-Isubprojects/ogre2/OgreMain/include",
         "-Isubprojects/ogre2/Components/Hlms/Common/include",
         "-Isubprojects/ogre2/Components/Hlms/Unlit/include",
-        "-Isubprojects/ogre2/Components/Hlms/Pbs/include",
-        #"-isystem/usr/include/freetype2",
-        "-isystem/usr/include/SDL2",
+        "-Isubprojects/ogre2/Components/Hlms/Pbs/include",                    
+        "-Isubprojects/ogredeps/src/SDL2/include",
     ],
     deps = [
       '//subprojects/ogre2/OgreMain',

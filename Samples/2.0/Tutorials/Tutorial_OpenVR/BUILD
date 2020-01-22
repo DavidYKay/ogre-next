@@ -18,9 +18,9 @@ cc_library(
         "-Isubprojects/ogre2/OgreMain/include",
         "-Isubprojects/ogre2/Samples/2.0/Common/include",
         "-Isubprojects/ogre2/Components/Overlay/include",
-        "-isystem/usr/include/SDL2",
         "-Isubprojects/ogre2/Components/Hlms/Pbs/include",
         "-Isubprojects/ogre2/Components/Hlms/Common/include",
+        "-isystemsubprojects/ogredeps/src/SDL2/include",
     ],
 
     deps = [
@@ -29,6 +29,7 @@ cc_library(
       '//subprojects/ogre2/Samples/2.0/Common',
       '//subprojects/ogre2/Components/Overlay',
       '//subprojects/libopenvr_api',
+      '//subprojects/ogredeps/src/SDL2',
     ],
 )
 
@@ -51,9 +52,10 @@ cc_binary(
         "-Isubprojects/ogre2/Components/Overlay/include",
         #"-Isubprojects/ogre2/Components/Hlms/Common/include",
         #"-Isubprojects/ogre2/Components/Hlms/Unlit/include",
-        "-isystem/usr/include/SDL2",
+        "-isystemsubprojects/ogredeps/src/SDL2/include",
+        # "-Isubprojects/ogredeps/src/SDL2/include",
     ],
-    linkopts = [ 
+    linkopts = [
         "-lSDL2",
         "-lfreetype",
     ],
@@ -62,6 +64,7 @@ cc_binary(
       '//subprojects/ogre2/OgreMain',
       '//subprojects/ogre2/Samples/2.0/Common',
       '//subprojects/ogre2/Components/Overlay',
+      '//subprojects/ogredeps/src/SDL2',
       #'//subprojects/libopenvr_api',
       #dependency('SDL2'),
     ],

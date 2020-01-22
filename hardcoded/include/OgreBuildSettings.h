@@ -4,6 +4,7 @@
 // TODO: Eventually, we should generate this using Meson's configure_file functionality.
 
 /* #undef OGRE_STATIC_LIB */
+#define OGRE_STATIC_LIB 1
 #define OGRE_DEBUG_LEVEL_DEBUG 3
 #define OGRE_DEBUG_LEVEL_RELEASE 0
 
@@ -110,7 +111,8 @@
 // This may hamper performance
 #define OGRE_DEBUG_MODE OGRE_DEBUG_MEDIUM
 
-#define OGRE_PLATFORM OGRE_PLATFORM_LINUX
+// #define OGRE_PLATFORM OGRE_PLATFORM_LINUX
+#define OGRE_PLATFORM OGRE_PLATFORM_WIN32
 
 /* #undef RTSHADER_SYSTEM_BUILD_CORE_SHADERS */
 

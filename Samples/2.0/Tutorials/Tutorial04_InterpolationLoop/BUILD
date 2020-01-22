@@ -16,7 +16,7 @@ cc_library(
         "-Isubprojects/ogre2/OgreMain/include",
         "-Isubprojects/ogre2/Samples/2.0/Common/include",
         "-Isubprojects/ogre2/Components/Overlay/include",
-        "-isystem/usr/include/SDL2",
+        "-isystemsubprojects/ogredeps/src/SDL2/include",
     ],
     deps = [
       '//subprojects/ogre2/OgreMain',
@@ -40,9 +40,9 @@ cc_binary(
         #"-Isubprojects/ogre2/Components/Hlms/Common/include",
         #"-Isubprojects/ogre2/Components/Hlms/Unlit/include",
         #"-Isubprojects/ogre2/Components/Hlms/Pbs/include",
-        "-isystem/usr/include/SDL2",
+        "-isystemsubprojects/ogredeps/src/SDL2/include",
     ],
-    linkopts = [ 
+    linkopts = [
         "-lSDL2",
         "-lfreetype",
     ],
@@ -56,7 +56,6 @@ cc_binary(
     ],
 )
 
-# -Isubprojects/ogre2/Samples/2.0/Tutorials/Tutorial04_InterpolationLoop 
-# -Isubprojects/ogre2/Samples/2.0/Common/include 
-# -Isubprojects/ogre2/OgreMain/include 
-
+# -Isubprojects/ogre2/Samples/2.0/Tutorials/Tutorial04_InterpolationLoop
+# -Isubprojects/ogre2/Samples/2.0/Common/include
+# -Isubprojects/ogre2/OgreMain/include

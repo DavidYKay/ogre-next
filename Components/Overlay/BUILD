@@ -38,7 +38,7 @@ cc_library(
         "-Isubprojects/ogre2/Components/Hlms/Common/include",
         "-Isubprojects/ogre2/Components/Hlms/Unlit/include",
         "-Isubprojects/ogre2/OgreMain/include",
-        "-isystem/usr/include/freetype2",
+        "-isystemsubprojects/ogredeps/src/freetype/include",
     ],
     deps = [
       '//subprojects/ogre2/OgreMain',

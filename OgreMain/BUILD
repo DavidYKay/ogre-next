@@ -295,11 +295,23 @@ cc_library(
       'src/OgreWireBoundingBox.cpp',
       'src/OgreWorkQueue.cpp',
       'src/OgreZip.cpp',
-      'src/Threading/OgreBarrierPThreads.cpp',
+
       'src/Threading/OgreDefaultWorkQueueStandard.cpp',
-      'src/Threading/OgreLightweightMutexPThreads.cpp',
-      'src/Threading/OgreThreadsPThreads.cpp',
       'src/Threading/OgreWaitableEvent.cpp',
+      
+      # Unix
+      # 'src/Threading/OgreBarrierPThreads.cpp',
+      # 'src/Threading/OgreThreadsPThreads.cpp',
+      # 'src/Threading/OgreLightweightMutexPThreads.cpp',
+      
+      # Windows
+      'src/Threading/OgreThreadsWin.cpp',
+      'src/Threading/OgreLightweightMutexWin.cpp',
+      'src/Threading/OgreBarrierWin.cpp',
+
+      # TBB
+      #'src/Threading/OgreDefaultWorkQueueTBB.cpp',
+
       'src/Vao/OgreAsyncTicket.cpp',
       'src/Vao/OgreBufferInterface.cpp',
       'src/Vao/OgreBufferPacked.cpp',
@@ -851,18 +863,22 @@ cc_library(
    'include/Vao/OgreVertexBufferDownloadHelper.h',
    'include/Vao/OgreVertexBufferPacked.h',
    'include/Vao/OgreVertexElements.h',
-   # 'include/WIN32/OgreComPtr.h',
-   # 'include/WIN32/OgreConfigDialogImp.h',
-   # 'include/WIN32/OgreConfigDialogImpWinRT.h',
-   # 'include/WIN32/OgreErrorDialogImp.h',
-   # 'include/WIN32/OgreErrorDialogImpWinRT.h',
-   # 'include/WIN32/OgreMinGWSupport.h',
-   # 'include/WIN32/OgreTimerImp.h',
+
+
    'include/asm_math.h',
    'include/debugbreak/debugbreak-gdb.py',
    'include/debugbreak/debugbreak.h',
+   # GTK
    'include/gtk/OgreConfigDialogImp.h',
    'include/gtk/OgreErrorDialogImp.h',
+   # Win32
+   'include/WIN32/OgreComPtr.h',
+   'include/WIN32/OgreConfigDialogImp.h',
+   'include/WIN32/OgreConfigDialogImpWinRT.h',
+   'include/WIN32/OgreErrorDialogImp.h',
+   'include/WIN32/OgreErrorDialogImpWinRT.h',
+   'include/WIN32/OgreMinGWSupport.h',
+   'include/WIN32/OgreTimerImp.h',
    #'../hardcoded/OgreBuildSettings.h',
    # 'include/iOS/OgreConfigDialogImp.h',
    # 'include/iOS/OgreErrorDialogImp.h',
@@ -875,14 +891,15 @@ cc_library(
         "-Isubprojects/ogredeps/src/rapidjson",
     ],
     linkopts = [
-        "-lfreeimage",
-        "-lX11",
-        "-lXt",
-        "-lXaw",
-        "-lpthread",
-        "-lzzip",
-        "-ldl",
-        "-lXrandr",
+        # Unix
+        # "-lfreeimage",
+        # "-lX11",
+        # "-lXt",
+        # "-lXaw",
+        # "-lpthread",
+        # "-lzzip",
+        # "-ldl",
+        # "-lXrandr",
     ],
     deps = [
         "//subprojects/ogredeps/src/rapidjson"

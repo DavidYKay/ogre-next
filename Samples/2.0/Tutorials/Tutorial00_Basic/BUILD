@@ -12,7 +12,7 @@ cc_binary(
         "-Isubprojects/ogre2/Components/Hlms/Common/include",
         "-Isubprojects/ogre2/Components/Hlms/Unlit/include",
         "-Isubprojects/ogre2/Components/Hlms/Pbs/include",
-        "-isystem/usr/include/SDL2",
+        "-isystemsubprojects/ogredeps/src/SDL2/include",
     ],
     linkopts = [
         #"-L/usr/lib64",
