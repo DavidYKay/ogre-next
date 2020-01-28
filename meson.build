@@ -18,6 +18,18 @@ add_project_arguments('-fcompare-debug-second', language: 'c')
 # ogredeps_proj = cmake.subproject('ogredeps')
 # zziplibDep = ogredeps_proj.target('zziplib')
 
+cc = meson.get_compiler('cpp')
+SDL2BinDep = declare_dependency(
+  dependencies : [
+    cc.find_library('libSDL2', dirs: [
+        'C:/Users/David/workspace/current/mccarthy/subprojects/ogre2/3rdparty/SDL2-mingw/lib'
+        ])],
+  include_directories: include_directories(
+    '3rdparty/SDL2-mingw/include/SDL2',
+    )
+)
+
+
 ogredeps_proj = subproject('ogredeps')
 # TODO: Standardize capitalization
 zziplibDep   = ogredeps_proj.get_variable('zziplibDep')
@@ -28,4 +40,4 @@ RapidJsonDep = ogredeps_proj.get_variable('RapidJsonDep')
 subdir('OgreMain')
 subdir('RenderSystems')
 subdir('Components')
-# subdir('Samples')
+subdir('Samples')

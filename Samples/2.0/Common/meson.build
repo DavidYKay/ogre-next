@@ -42,14 +42,15 @@ incdir = include_directories(
 SamplesCommon  = static_library('SamplesCommon', lib_src,
   link_with: [
     HlmsPbsComponent,
-    ],
+  ],
   dependencies: [
     OgreMainDep,
     OverlayComponentDep,
     HlmsCommonDep,
     HlmsPbsComponentDep,
     HlmsUnlitComponentDep,
-    dependency('SDL2'),
+    SDL2BinDep,
+    #dependency('SDL2'),
     #cc.find_library('freetype2'),
   ],
   include_directories : incdir)

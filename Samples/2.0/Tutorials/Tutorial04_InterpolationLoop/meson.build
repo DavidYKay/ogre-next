@@ -18,7 +18,8 @@ Tutorial04InterpolationLoop  = executable('Tutorial04InterpolationLoop', src,
     SamplesCommonDep,
     HlmsPbsComponentDep,
     HlmsUnlitComponentDep,
-    dependency('SDL2'),
+    # dependency('SDL2'),
+    SDL2BinDep,
   ],
   include_directories : incdir)
 
