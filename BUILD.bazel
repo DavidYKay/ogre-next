@@ -2,9 +2,9 @@ package(default_visibility = ["//visibility:public"])
 
 cc_import(
     name = "OgreMainDllBin",
-    shared_library    = "cbuild/bin/debug/OgreMain_d.dll",
-    #static_library   = "cbuild/lib/Debug/OgreMain_d.lib",
-    interface_library = "cbuild/lib/Debug/OgreMain_d.lib",
+    shared_library    = "build/bin/debug/OgreMain_d.dll",
+    #static_library   = "build/lib/Debug/OgreMain_d.lib",
+    interface_library = "build/lib/Debug/OgreMain_d.lib",
 )
 
 cc_library(
@@ -45,7 +45,7 @@ cc_library(
         'OgreMain/include/Compositor/Pass/PassQuad',
         'OgreMain/include/Compositor/Pass/PassMipmap',
         'OgreMain/include/Compositor/Pass/PassDepthCopy',
-        'cbuild/include',
+        'build/include',
     ],
     hdrs = [
         #'OgreMain/include/Android/OgreAPKFileSystemArchive.h',
@@ -240,7 +240,7 @@ cc_library(
         'OgreMain/include/OgreBitwise.h',
         'OgreMain/include/OgreBlendMode.h',
         # TODO: Generate this per-platform
-        'cbuild/include/OgreBuildSettings.h',
+        'build/include/OgreBuildSettings.h',
         'OgreMain/include/OgreCamera.h',
         'OgreMain/include/OgreCodec.h',
         'OgreMain/include/OgreColourValue.h',
@@ -568,9 +568,9 @@ cc_library(
 
 cc_import(
     name = "OgreOverlayBin",
-    shared_library    = "cbuild/bin/debug/OgreOverlay_d.dll",
-    static_library    = "cbuild/lib/Debug/OgreOverlay_d.lib",
-    # static_library   = "cbuild/lib/Debug/OgreMain_d.lib",
+    shared_library    = "build/bin/debug/OgreOverlay_d.dll",
+    static_library    = "build/lib/Debug/OgreOverlay_d.lib",
+    # static_library   = "build/lib/Debug/OgreMain_d.lib",
     hdrs = [],
     )
 
@@ -586,9 +586,9 @@ cc_library(
 
 cc_import(
     name = "OgreHlmsUnlitBin",
-    shared_library    = "cbuild/bin/debug/OgreHlmsUnlit_d.dll",
-    static_library    = "cbuild/lib/Debug/OgreHlmsUnlit_d.lib",
-    # static_library  = "cbuild/lib/Debug/OgreMain_d.lib",
+    shared_library    = "build/bin/debug/OgreHlmsUnlit_d.dll",
+    static_library    = "build/lib/Debug/OgreHlmsUnlit_d.lib",
+    # static_library  = "build/lib/Debug/OgreMain_d.lib",
     hdrs = [],
     )
 
@@ -602,9 +602,9 @@ cc_library(
 
 cc_import(
     name = "OgreHlmsPbsBin",
-    shared_library   = "cbuild/bin/debug/OgreHlmsPbs_d.dll",
-    static_library   = "cbuild/lib/Debug/OgreHlmsPbs_d.lib",
-    # static_library = "cbuild/lib/Debug/OgreMain_d.lib",
+    shared_library   = "build/bin/debug/OgreHlmsPbs_d.dll",
+    static_library   = "build/lib/Debug/OgreHlmsPbs_d.lib",
+    # static_library = "build/lib/Debug/OgreMain_d.lib",
     hdrs = [],
     )
 
@@ -619,57 +619,57 @@ cc_library(
 cc_library(
     name = "OgreMain",
     srcs = [
-       "cbuild/lib/Debug/OgreMain_d.lib",
-       "cbuild/lib/Debug/OgreHlmsPbs_d.lib",
-       "cbuild/lib/Debug/OgreHlmsUnlit_d.lib",
-       "cbuild/lib/Debug/OgreMeshLodGenerator_d.lib",
-       "cbuild/lib/Debug/OgreOverlay_d.lib",
-       "cbuild/lib/Debug/OgreSamplesCommon_d.lib",
-       "cbuild/lib/Debug/OgreSceneFormat_d.lib",
-       "cbuild/lib/Debug/Plugin_ParticleFX_d.lib",
-       "cbuild/lib/Debug/RenderSystem_Direct3D11_d.lib",
-       "cbuild/lib/Debug/RenderSystem_GL3Plus_d.lib",
+       "build/lib/Debug/OgreMain_d.lib",
+       "build/lib/Debug/OgreHlmsPbs_d.lib",
+       "build/lib/Debug/OgreHlmsUnlit_d.lib",
+       "build/lib/Debug/OgreMeshLodGenerator_d.lib",
+       "build/lib/Debug/OgreOverlay_d.lib",
+       "build/lib/Debug/OgreSamplesCommon_d.lib",
+       "build/lib/Debug/OgreSceneFormat_d.lib",
+       "build/lib/Debug/Plugin_ParticleFX_d.lib",
+       "build/lib/Debug/RenderSystem_Direct3D11_d.lib",
+       "build/lib/Debug/RenderSystem_GL3Plus_d.lib",
 
-       # "cbuild/bin/debug/OgreMain_d.dll",
-       # "cbuild/bin/debug/OgreHlmsPbs_d.dll",
-       # "cbuild/bin/debug/OgreHlmsUnlit_d.dll",
-       # "cbuild/bin/debug/OgreMeshLodGenerator_d.dll",
-       # "cbuild/bin/debug/OgreOverlay_d.dll",
-       # "cbuild/bin/debug/OgreSceneFormat_d.dll",
-       # "cbuild/bin/debug/Plugin_ParticleFX_d.dll",
-       # "cbuild/bin/debug/RenderSystem_Direct3D11_d.dll",
-       # "cbuild/bin/debug/RenderSystem_GL3Plus_d.dll",
+       # "build/bin/debug/OgreMain_d.dll",
+       # "build/bin/debug/OgreHlmsPbs_d.dll",
+       # "build/bin/debug/OgreHlmsUnlit_d.dll",
+       # "build/bin/debug/OgreMeshLodGenerator_d.dll",
+       # "build/bin/debug/OgreOverlay_d.dll",
+       # "build/bin/debug/OgreSceneFormat_d.dll",
+       # "build/bin/debug/Plugin_ParticleFX_d.dll",
+       # "build/bin/debug/RenderSystem_Direct3D11_d.dll",
+       # "build/bin/debug/RenderSystem_GL3Plus_d.dll",
 
-       # "cbuild/lib/Release/OgreMain.lib",
-       # "cbuild/lib/Release/OgreHlmsPbs.lib",
-       # "cbuild/lib/Release/OgreHlmsUnlit.lib",
-       # "cbuild/lib/Release/OgreMeshLodGenerator.lib",
-       # "cbuild/lib/Release/OgreOverlay.lib",
-       # "cbuild/lib/Release/OgreSamplesCommon.lib",
-       # "cbuild/lib/Release/OgreSceneFormat.lib",
-       # "cbuild/bin/release/Plugin_ParticleFX.dll",
-       # "cbuild/bin/release/RenderSystem_Direct3D11.dll",
-       # "cbuild/bin/release/RenderSystem_GL3Plus.dll",
+       # "build/lib/Release/OgreMain.lib",
+       # "build/lib/Release/OgreHlmsPbs.lib",
+       # "build/lib/Release/OgreHlmsUnlit.lib",
+       # "build/lib/Release/OgreMeshLodGenerator.lib",
+       # "build/lib/Release/OgreOverlay.lib",
+       # "build/lib/Release/OgreSamplesCommon.lib",
+       # "build/lib/Release/OgreSceneFormat.lib",
+       # "build/bin/release/Plugin_ParticleFX.dll",
+       # "build/bin/release/RenderSystem_Direct3D11.dll",
+       # "build/bin/release/RenderSystem_GL3Plus.dll",
 
-       #"cbuild/lib/Release/Plugin_ParticleFX.lib",
-       #"cbuild/lib/Release/RenderSystem_Direct3D11.lib",
-       #"cbuild/lib/Release/RenderSystem_GL3Plus.lib",
+       #"build/lib/Release/Plugin_ParticleFX.lib",
+       #"build/lib/Release/RenderSystem_Direct3D11.lib",
+       #"build/lib/Release/RenderSystem_GL3Plus.lib",
 
-       #"cbuild/bin/release/OgreMain.dll",
-       #"cbuild/bin/release/OgreHlmsPbs.dll",
-       #"cbuild/bin/release/OgreHlmsUnlit.dll",
-       #"cbuild/bin/release/OgreMeshLodGenerator.dll",
-       #"cbuild/bin/release/OgreOverlay.dll",
-       #"cbuild/bin/release/OgreSceneFormat.dll",
+       #"build/bin/release/OgreMain.dll",
+       #"build/bin/release/OgreHlmsPbs.dll",
+       #"build/bin/release/OgreHlmsUnlit.dll",
+       #"build/bin/release/OgreMeshLodGenerator.dll",
+       #"build/bin/release/OgreOverlay.dll",
+       #"build/bin/release/OgreSceneFormat.dll",
 
-      #"cbuild/lib/Debug/RenderSystem_NULL_d.lib",
+      #"build/lib/Debug/RenderSystem_NULL_d.lib",
     ],
     hdrs = glob([
         "OgreMain/include/*.h"
     ]),
     includes = [
         "OgreMain/include",
-        "cbuild/include",
+        "build/include",
         "Components/Hlms/Pbs/include",
         "Components/Hlms/Common/include",
         "Components/Hlms/Unlit/include",
