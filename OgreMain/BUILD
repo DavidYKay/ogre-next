@@ -1,5 +1,17 @@
 package(default_visibility = ["//visibility:public"])
 
+config_setting(
+    name = "linux",
+    values = {"cpu": "k8"},
+    visibility = ["//visibility:public"],
+)
+ 
+config_setting(
+    name = "win32",
+    values = {"cpu": "x64_windows"},
+    visibility = ["//visibility:public"],
+)
+
 cc_library(
     name = "OgreMain",
     srcs = [
@@ -40,11 +52,6 @@ cc_library(
       # 'src/Emscripten/OgreConfigDialog.cpp',
       # 'src/Emscripten/OgreErrorDialog.cpp',
       # 'src/Emscripten/OgreTimer.cpp',
-      'src/GLX/GLX_backdrop.h',
-      'src/GLX/OgreConfigDialog.cpp',
-      'src/GLX/OgreErrorDialog.cpp',
-      'src/GLX/OgreFileSystemLayer.cpp',
-      'src/GLX/OgreTimer.cpp',
       'src/Hash/MurmurHash3.cpp',
       #'src/Math/Array/C/OgreArrayAabb.cpp',
       #'src/Math/Array/C/OgreArrayMatrix4.cpp',
@@ -298,16 +305,6 @@ cc_library(
 
       'src/Threading/OgreDefaultWorkQueueStandard.cpp',
       'src/Threading/OgreWaitableEvent.cpp',
-      
-      # Unix
-      'src/Threading/OgreBarrierPThreads.cpp',
-      'src/Threading/OgreThreadsPThreads.cpp',
-      'src/Threading/OgreLightweightMutexPThreads.cpp',
-      
-      # Windows
-      #'src/Threading/OgreThreadsWin.cpp',
-      #'src/Threading/OgreLightweightMutexWin.cpp',
-      #'src/Threading/OgreBarrierWin.cpp',
 
       # TBB
       #'src/Threading/OgreDefaultWorkQueueTBB.cpp',
@@ -334,7 +331,25 @@ cc_library(
       'src/stbi/stb_image.c',
       'src/stbi/stb_image.h',
       'src/stbi/stb_image_write.h',
-    ],
+    ] + select({
+     ":linux": [
+         'src/GLX/GLX_backdrop.h',
+         'src/GLX/OgreConfigDialog.cpp',
+         'src/GLX/OgreErrorDialog.cpp',
+         'src/GLX/OgreFileSystemLayer.cpp',
+         'src/GLX/OgreTimer.cpp',
+         'src/Threading/OgreBarrierPThreads.cpp',
+         'src/Threading/OgreThreadsPThreads.cpp',
+         'src/Threading/OgreLightweightMutexPThreads.cpp',
+     ],
+     ":win32": [
+         # Windows
+         'src/Threading/OgreThreadsWin.cpp',
+         'src/Threading/OgreLightweightMutexWin.cpp',
+         'src/Threading/OgreBarrierWin.cpp',
+      ],
+    }),
+  
     hdrs = [
 #    'include/NaCl',
 #    'include/Android',
