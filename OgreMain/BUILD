@@ -901,10 +901,7 @@ cc_library(
    # 'include/iOS/OgreTimerImp.h',
    # 'include/iOS/macUtils.h',
     ],
-    copts = [
-        "-Isubprojects/ogre2/OgreMain/include",
-        "-Isubprojects/ogredeps/src/rapidjson",
-    ],
+    includes = [ "include", ],
     linkopts = [
         # Unix
         # "-lfreeimage",
