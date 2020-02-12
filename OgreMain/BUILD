@@ -300,14 +300,14 @@ cc_library(
       'src/Threading/OgreWaitableEvent.cpp',
       
       # Unix
-      # 'src/Threading/OgreBarrierPThreads.cpp',
-      # 'src/Threading/OgreThreadsPThreads.cpp',
-      # 'src/Threading/OgreLightweightMutexPThreads.cpp',
+      'src/Threading/OgreBarrierPThreads.cpp',
+      'src/Threading/OgreThreadsPThreads.cpp',
+      'src/Threading/OgreLightweightMutexPThreads.cpp',
       
       # Windows
-      'src/Threading/OgreThreadsWin.cpp',
-      'src/Threading/OgreLightweightMutexWin.cpp',
-      'src/Threading/OgreBarrierWin.cpp',
+      #'src/Threading/OgreThreadsWin.cpp',
+      #'src/Threading/OgreLightweightMutexWin.cpp',
+      #'src/Threading/OgreBarrierWin.cpp',
 
       # TBB
       #'src/Threading/OgreDefaultWorkQueueTBB.cpp',
