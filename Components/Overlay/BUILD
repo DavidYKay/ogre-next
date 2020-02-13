@@ -33,16 +33,18 @@ cc_library(
       'include/OgreOverlayElementFactory.h',
       'include/OgreOverlayPrerequisites.h',
     ],
+    includes = [
+        'include',
+    ],
     copts = [
-        "-Isubprojects/ogre2/Components/Overlay/include",
-        "-Isubprojects/ogre2/Components/Hlms/Common/include",
-        "-Isubprojects/ogre2/Components/Hlms/Unlit/include",
-        "-Isubprojects/ogre2/OgreMain/include",
-        "-isystemsubprojects/ogredeps/src/freetype/include",
+        #"-isystemsubprojects/ogredeps/src/freetype/include",
+        #"-Isubprojects/ogredeps/src/freetype/include",
+        "-isystem/usr/include/freetype2",
+        "-I/usr/include/freetype2",
     ],
     deps = [
+      #'//subprojects/ogredeps/src/freetype',
       '//subprojects/ogre2/OgreMain',
       '//subprojects/ogre2/Components/Hlms/Unlit',
-      #dependency('freetype2'),
     ],
   )

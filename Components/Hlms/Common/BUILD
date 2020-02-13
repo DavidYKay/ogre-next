@@ -10,9 +10,8 @@ cc_library(
       'include/OgreHlmsTextureBaseClass.h',
       'include/OgreHlmsTextureBaseClass.inl',
     ],
-    copts = [
-        "-Isubprojects/ogre2/Components/Hlms/Common/include",
-        "-Isubprojects/ogre2/OgreMain/include",
+    includes = [
+        'include',
     ],
   deps = [
     '//subprojects/ogre2/OgreMain'

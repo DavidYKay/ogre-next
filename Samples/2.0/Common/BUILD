@@ -1,7 +1,7 @@
-package(default_visibility = ["//visibility:public"])
+package(default_visibility = ['//visibility:public'])
 
 cc_library(
-    name = "Common",
+    name = 'Common',
     srcs = [
       'src/GameEntityManager.cpp',
       'src/TutorialGameState.cpp',
@@ -60,39 +60,18 @@ cc_library(
       'include/Utils/SmaaUtils.h',
       'include/Utils/TestUtils.h',
     ],
-    #glob([
-    #    'include/*.h',
-    #    'include/*/*.h',
-    #    #'**/*.h',
-    #]),
-    #[
-    #    'include/LogicSystem.h',
-    #    'include/Utils/MiscUtils.h',
-    #],
-    # hdrs = glob([
-    #   'include/*.h',
-    #   'include/Utils/*.h',
-    #   'include/System/*.h',
-    #   'include/Threading/*.h',
-    #   ## 'include/System/iOS',
-    #   ## 'include/System/OSX',
-    # ]),
+    includes = [
+        'include',
+    ],
     copts = [
-        "-Isubprojects/ogre2/Samples/2.0/Common/include",
-        "-Isubprojects/ogre2/Components/Overlay/include",
-        "-Isubprojects/ogre2/OgreMain/include",
-        "-Isubprojects/ogre2/Components/Hlms/Common/include",
-        "-Isubprojects/ogre2/Components/Hlms/Unlit/include",
-        "-Isubprojects/ogre2/Components/Hlms/Pbs/include",                    
-        "-Isubprojects/ogredeps/src/SDL2/include",
+        #'-Isubprojects/ogredeps/src/SDL2/include',
+        #'-isystem/usr/include/SDL2',
     ],
     deps = [
+      '//subprojects/ogredeps/src/SDL2',
       '//subprojects/ogre2/OgreMain',
       '//subprojects/ogre2/Components/Hlms/Unlit',
       '//subprojects/ogre2/Components/Hlms/Pbs',
       '//subprojects/ogre2/Components/Overlay',
-      #'//subprojects/ogre2/Components/Hlms/Common',
-      #HlmsCommonDep,
-      #dependency('SDL2'),
     ],
   )

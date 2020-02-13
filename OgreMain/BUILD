@@ -904,14 +904,15 @@ cc_library(
     includes = [ "include", ],
     linkopts = [
         # Unix
-        # "-lfreeimage",
-        # "-lX11",
-        # "-lXt",
-        # "-lXaw",
-        # "-lpthread",
-        # "-lzzip",
-        # "-ldl",
-        # "-lXrandr",
+        # These only needed in the binary
+        "-lfreeimage",
+        "-lX11",
+        "-lXt",
+        "-lXaw",
+        "-lpthread",
+        "-lzzip",
+        "-ldl",
+        "-lXrandr",
     ],
     deps = [
         "//subprojects/ogredeps/src/rapidjson"

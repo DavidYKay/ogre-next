@@ -1,7 +1,7 @@
-package(default_visibility = ["//visibility:public"])
+package(default_visibility = ['//visibility:public'])
 
 cc_library(
-    name = "Pbs",
+    name = 'Pbs',
     srcs = [
       'src/OgreHlmsJsonPbs.cpp',
       'src/InstantRadiosity/OgreInstantRadiosity.cpp',
@@ -34,14 +34,17 @@ cc_library(
       'include/Vct/OgreVctVoxelizer.h',
       'include/OgreIrradianceVolume.h',
     ],
+    includes = [
+        'include',
+    ],
     copts = [
-        "-Isubprojects/ogre2/Components/Hlms/Pbs/include",
-        "-Isubprojects/ogre2/Components/Hlms/Common/include",
-        "-Isubprojects/ogre2/OgreMain/include",
-        "-Isubprojects/ogredeps/src/rapidjson",
+        #'-Isubprojects/ogre2/Components/Hlms/Pbs/include',
+        #'-Isubprojects/ogre2/Components/Hlms/Common/include',
+        #'-Isubprojects/ogre2/OgreMain/include',
+        #'-Isubprojects/ogredeps/src/rapidjson',
     ],
   deps = [
-    "//subprojects/ogredeps/src/rapidjson",
+    '//subprojects/ogredeps/src/rapidjson',
     '//subprojects/ogre2/Components/Hlms/Common',
     '//subprojects/ogre2/OgreMain',
   ],
