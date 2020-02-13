@@ -1,17 +1,5 @@
 package(default_visibility = ["//visibility:public"])
 
-config_setting(
-    name = "linux",
-    values = {"cpu": "k8"},
-    visibility = ["//visibility:public"],
-)
- 
-config_setting(
-    name = "win32",
-    values = {"cpu": "x64_windows"},
-    visibility = ["//visibility:public"],
-)
-
 cc_library(
     name = "OgreMain",
     srcs = [
@@ -332,7 +320,7 @@ cc_library(
       'src/stbi/stb_image.h',
       'src/stbi/stb_image_write.h',
     ] + select({
-     ":linux": [
+     "//platforms:linux": [
          'src/GLX/GLX_backdrop.h',
          'src/GLX/OgreConfigDialog.cpp',
          'src/GLX/OgreErrorDialog.cpp',
@@ -342,7 +330,7 @@ cc_library(
          'src/Threading/OgreThreadsPThreads.cpp',
          'src/Threading/OgreLightweightMutexPThreads.cpp',
      ],
-     ":win32": [
+     "//platforms:win32": [
          # Windows
          'src/Threading/OgreThreadsWin.cpp',
          'src/Threading/OgreLightweightMutexWin.cpp',
@@ -894,12 +882,12 @@ cc_library(
    'include/WIN32/OgreErrorDialogImpWinRT.h',
    'include/WIN32/OgreMinGWSupport.h',
    'include/WIN32/OgreTimerImp.h',
-   #'../hardcoded/OgreBuildSettings.h',
-   # 'include/iOS/OgreConfigDialogImp.h',
-   # 'include/iOS/OgreErrorDialogImp.h',
-   # 'include/iOS/OgreOSXCocoaTouchView.h',
-   # 'include/iOS/OgreTimerImp.h',
-   # 'include/iOS/macUtils.h',
+    #'../hardcoded/OgreBuildSettings.h',
+    # 'include/iOS/OgreConfigDialogImp.h',
+    # 'include/iOS/OgreErrorDialogImp.h',
+    # 'include/iOS/OgreOSXCocoaTouchView.h',
+    # 'include/iOS/OgreTimerImp.h',
+    # 'include/iOS/macUtils.h',
     ],
     includes = [ "include", ],
     linkopts = [
