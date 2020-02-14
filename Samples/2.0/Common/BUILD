@@ -63,10 +63,7 @@ cc_library(
     includes = [
         'include',
     ],
-    copts = [
-        #'-Isubprojects/ogredeps/src/SDL2/include',
-        #'-isystem/usr/include/SDL2',
-    ],
+    copts = [ ],
     deps = [
       '//subprojects/ogredeps/src/SDL2',
       '//subprojects/ogre2/OgreMain',

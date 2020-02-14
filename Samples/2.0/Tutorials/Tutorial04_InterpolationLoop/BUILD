@@ -1,7 +1,5 @@
 package(default_visibility = ['//visibility:public'])
 
-load('@rules_cc//cc:defs.bzl', 'cc_binary')
-
 cc_library(
     name = 'lib',
     srcs = [
@@ -15,17 +13,8 @@ cc_library(
     includes = [
         '.',
     ],
-    copts = [
-        #'-Isubprojects/ogre2/OgreMain/include',
-        #'-Isubprojects/ogre2/Samples/2.0/Common/include',
-        #'-Isubprojects/ogre2/Components/Overlay/include',
-        #'-isystemsubprojects/ogredeps/src/SDL2/include',
-    ],
     deps = [
-      '//subprojects/ogre2/OgreMain',
       '//subprojects/ogre2/Samples/2.0/Common',
-      #'//subprojects/ogre2/Samples/2.0/Common',
-      #'//subprojects/ogre2/Components/Overlay',
     ],
 )
 
@@ -33,23 +22,23 @@ cc_binary(
     name = 'Tutorial04_InterpolationLoop',
     srcs = [
         'Tutorial04_InterpolationLoop.cpp',
-        'GraphicsGameState.cpp',
-        'LogicGameState.cpp',
     ],
-    #includes = [ '.', ],
-    copts = [
-        # '-isystemsubprojects/ogredeps/src/SDL2/include',
-        # '-isystem/usr/include/SDL2',
-        # '-I/usr/include/SDL2',
-        #"-isystemsubprojects/ogredeps/src/freetype/include",
-        #"-isystem/usr/include/freetype2",
-    ],
-    linkopts = [
-        '-lSDL2',
-        '-lfreetype',
-    ],
+    copts = select({
+        "//platforms:linux": [
+            '-isystem/usr/include/freetype2',
+        ],
+        "//conditions:default": [],
+    }),
+    linkopts = select({
+        "//platforms:linux": [
+            '-lSDL2',
+            '-lfreetype',
+        ],
+        "//conditions:default": [],
+    }),
     deps = [
       ':lib',
+      #'@freetype2',
       '//subprojects/ogredeps/src/SDL2',
       '//subprojects/ogre2/OgreMain',
       '//subprojects/ogre2/Samples/2.0/Common',
