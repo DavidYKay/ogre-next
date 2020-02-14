@@ -13,16 +13,6 @@ cc_library(
       'Tutorial_OpenVRGameState.h',
       'Tutorial_OpenVR.h',
     ],
-    copts = [
-        "-Isubprojects/libopenvr_api/headers",
-        "-Isubprojects/ogre2/OgreMain/include",
-        "-Isubprojects/ogre2/Samples/2.0/Common/include",
-        "-Isubprojects/ogre2/Components/Overlay/include",
-        "-Isubprojects/ogre2/Components/Hlms/Pbs/include",
-        "-Isubprojects/ogre2/Components/Hlms/Common/include",
-        "-isystemsubprojects/ogredeps/src/SDL2/include",
-    ],
-
     deps = [
       '//subprojects/ogre2/Components/Hlms/Pbs',
       '//subprojects/ogre2/OgreMain',
