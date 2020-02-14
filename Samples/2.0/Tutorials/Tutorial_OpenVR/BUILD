@@ -38,34 +38,12 @@ cc_binary(
     srcs = [
       'Tutorial_OpenVR.cpp',
     ],
-    includes = [
-        #"subprojects/libopenvr_api/headers",
-        #"subprojects/ogre2/Samples/2.0/Tutorials/Tutorial_OpenVR",
-    ],
-    copts = [
-        "-Isubprojects/ogre2/Samples/2.0/Tutorials/Tutorial_OpenVR",
-        "-Isubprojects/libopenvr_api/headers",
-        #"-Isubprojects/ogre2/Samples/2.0/Tutorials/Tutorial04",
-        #"-Isubprojects/ogre2/Samples/2.0/Tutorials/headers",
-        "-Isubprojects/ogre2/Samples/2.0/Common/include",
-        "-Isubprojects/ogre2/OgreMain/include",
-        "-Isubprojects/ogre2/Components/Overlay/include",
-        #"-Isubprojects/ogre2/Components/Hlms/Common/include",
-        #"-Isubprojects/ogre2/Components/Hlms/Unlit/include",
-        "-isystemsubprojects/ogredeps/src/SDL2/include",
-        # "-Isubprojects/ogredeps/src/SDL2/include",
-    ],
-    linkopts = [
-        "-lSDL2",
-        "-lfreetype",
-    ],
-    deps = [
-      ':lib',
-      '//subprojects/ogre2/OgreMain',
-      '//subprojects/ogre2/Samples/2.0/Common',
-      '//subprojects/ogre2/Components/Overlay',
-      '//subprojects/ogredeps/src/SDL2',
-      #'//subprojects/libopenvr_api',
-      #dependency('SDL2'),
-    ],
+    linkopts = select({
+        "//platforms:linux": [
+            '-lSDL2',
+            '-lfreetype',
+        ],
+        "//conditions:default": [],
+    }),
+    deps = [ ':lib' ],
   )
