@@ -63,6 +63,12 @@ cc_library(
     includes = [
         'include',
     ],
+    copts = select({
+        "//platforms:win32": [ ],
+        "//conditions:default": [
+            '-I/usr/include/SDL2'
+        ],
+    }),
     deps = [
       #'//subprojects/ogredeps/src/SDL2',
       #'//3rdparty/SDL2',

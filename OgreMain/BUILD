@@ -339,8 +339,6 @@ cc_library(
     }),
   
     hdrs = [
-   # TODO: Generate this per-platform
-   'include/OgreBuildSettings.h',
 
     #'include/Android/OgreAPKFileSystemArchive.h',
     #'include/Android/OgreAPKZipArchive.h',
@@ -836,7 +834,6 @@ cc_library(
    # GTK
    'include/gtk/OgreConfigDialogImp.h',
    'include/gtk/OgreErrorDialogImp.h',
-    #'../hardcoded/OgreBuildSettings.h',
     # 'include/iOS/OgreConfigDialogImp.h',
     # 'include/iOS/OgreErrorDialogImp.h',
     # 'include/iOS/OgreOSXCocoaTouchView.h',
@@ -845,6 +842,7 @@ cc_library(
 
     ] + select({
         "//platforms:win32": [
+            'hardcoded/win32/OgreBuildSettings.h',
             'include/WIN32/OgreComPtr.h',
             'include/WIN32/OgreConfigDialogImp.h',
             'include/WIN32/OgreConfigDialogImpWinRT.h',
@@ -853,7 +851,14 @@ cc_library(
             'include/WIN32/OgreMinGWSupport.h',
             'include/WIN32/OgreTimerImp.h',
             ],
-        "//conditions:default": [
+        "//platforms:linux": [
+            'hardcoded/linux/OgreBuildSettings.h',
+            'include/GLX/OgreConfigDialogImp.h',
+            'include/GLX/OgreErrorDialogImp.h',
+            'include/GLX/OgreTimerImp.h',
+        ],
+        "//platforms:mac": [
+            'hardcoded/mac/OgreBuildSettings.h',
             'include/GLX/OgreConfigDialogImp.h',
             'include/GLX/OgreErrorDialogImp.h',
             'include/GLX/OgreTimerImp.h',
@@ -894,7 +899,17 @@ cc_library(
         #'include/Compositor/Pass/PassQuad',
         #'include/Compositor/Pass/PassMipmap',
         #'include/Compositor/Pass/PassDepthCopy',
-    ],
+    ] + select({
+        "//platforms:win32": [
+            'hardcoded/win32',
+        ],
+        "//platforms:linux": [
+            'hardcoded/linux',
+        ],
+        "//platforms:mac": [
+            'hardcoded/mac',
+        ],
+    }),
     linkopts = select({
         "//platforms:win32": [ ],
         "//conditions:default": [
