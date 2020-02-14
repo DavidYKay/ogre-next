@@ -55,21 +55,8 @@ cc_library(
     #hdrs = glob([ 'include/*.h', 'include/windowing/*.h', 'include/windowing/GLX/*.h', 'include/Vao/*.h', 'include/GLSL/*.h', 'include/GL/*.h', # Add Windows support here 'src/windowing/GLX/*.h', ]),
 
     hdrs = [
-      'include/windowing/GLX/OgreGLXUtils.h',
-      'include/windowing/GLX/OgreGLXWindow.h',
-      'include/windowing/GLX/OgreGLXGLSupport.h',
-      'include/windowing/GLX/OgreGLXContext.h',
       'include/windowing/gtk/OgreGTKGLSupport.h',
       'include/windowing/gtk/OgreGTKWindow.h',
-      #'include/windowing/win32/OgreWin32GLSupport.h',
-      #'include/windowing/win32/OgreWin32Prerequisites.h',
-      #'include/windowing/win32/OgreWin32Context.h',
-      #'include/windowing/win32/OgreWin32Window.h',
-      #'include/windowing/OSX/OgreOSXCocoaContext.h',
-      #'include/windowing/OSX/OgreOSXCocoaWindow.h',
-      #'include/windowing/OSX/OgreOSXCocoaWindowDelegate.h',
-      #'include/windowing/OSX/OgreOSXGL3PlusSupport.h',
-      #'include/windowing/OSX/OgreOSXCocoaView.h',
       #'include/windowing/SDL/OgreSDLGLSupport.h',
       #'include/windowing/SDL/OgreSDLWindow.h',
       #'include/windowing/SDL/OgreSDLPrerequisites.h',
@@ -138,21 +125,49 @@ cc_library(
       #'include/Deprecated/OgreGL3PlusRenderTexture.h',
       #'include/Deprecated/OgreGL3PlusFBOMultiRenderTarget.h',
       #'include/Deprecated/OgreGL3PlusDepthBuffer.h',
-    ],
-    copts = [
-        #"-Isubprojects/ogre2/RenderSystems/GL3Plus/include/Vao",
-        "-Isubprojects/ogre2/RenderSystems/GL3Plus/include",
-        "-Isubprojects/ogre2/RenderSystems/GL3Plus/include/GLSL",
-        "-Isubprojects/ogre2/RenderSystems/GL3Plus/include/windowing/GLX",
-        "-Isubprojects/ogre2/RenderSystems/GL3Plus/src/windowing/GLX",
-        "-Isubprojects/ogre2/Components/Hlms/Common/include",
-        "-Isubprojects/ogre2/OgreMain/include",
-    ],
+    ] + select({
+        "//platforms:win32": [
+            'include/windowing/win32/OgreWin32GLSupport.h',
+            'include/windowing/win32/OgreWin32Prerequisites.h',
+            'include/windowing/win32/OgreWin32Context.h',
+            'include/windowing/win32/OgreWin32Window.h',
+        ],
+        "//platforms:mac": [
+            'include/windowing/OSX/OgreOSXCocoaContext.h',
+            'include/windowing/OSX/OgreOSXCocoaWindow.h',
+            'include/windowing/OSX/OgreOSXCocoaWindowDelegate.h',
+            'include/windowing/OSX/OgreOSXGL3PlusSupport.h',
+            'include/windowing/OSX/OgreOSXCocoaView.h',
+        ],
+        "//conditions:default": [
+            'src/windowing/GLX/OgreGL3PlusUtil.h',
+            'include/windowing/GLX/OgreGLXUtils.h',
+            'include/windowing/GLX/OgreGLXWindow.h',
+            'include/windowing/GLX/OgreGLXGLSupport.h',
+            'include/windowing/GLX/OgreGLXContext.h',
+        ],
+    }),
+    includes = [
+        'include',
+        'include/GLSL',
+        'include/Vao',
+    ] + select ({
+        "//platforms:win32": [
+            'include/windowing/win32',
+        ],
+        "//conditions:default": [
+            'include/windowing/GLX',
+            'src/windowing/GLX',
+        ],
+    }),
+    linkopts = select({
+        "//platforms:win32": [
+        ],
+        "//conditions:default": [
+            "-lGL",
+        ],
+    }),
   deps = [
     '//subprojects/ogre2/OgreMain'
-    # dependency('xrandr'),
-    # cc.find_library('dl'),
-    # cc.find_library('GL'),
-    # cc.find_library('X11'),
   ],
 )
