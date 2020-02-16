@@ -70,13 +70,17 @@ cc_library(
         ],
     }),
     deps = [
-      #'//subprojects/ogredeps/src/SDL2',
-      #'//3rdparty/SDL2',
-      #'@SDL2',
       '//subprojects/ogre2/OgreMain',
       '//subprojects/ogre2/Components/Hlms/Unlit',
       '//subprojects/ogre2/Components/Hlms/Pbs',
       '//subprojects/ogre2/Components/Overlay',
       '//subprojects/ogre2/RenderSystems/GL3Plus',
-    ],
-  )
+      ] + select({
+        "//platforms:win32": [ 
+          #'//3rdparty/SDL2',
+          #'//subprojects/ogredeps/src/SDL2',
+          '@SDL2',
+        ],
+        "//conditions:default": [ ],
+      })
+)

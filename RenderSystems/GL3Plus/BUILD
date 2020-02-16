@@ -47,11 +47,20 @@ cc_library(
       'src/Vao/OgreGL3PlusUavBufferPacked.cpp',
       'src/Vao/OgreGL3PlusVaoManager.cpp',
       'src/gl3w.cpp',
-      'src/windowing/GLX/OgreGL3PlusUtil.h',
-      'src/windowing/GLX/OgreGLXContext.cpp',
-      'src/windowing/GLX/OgreGLXGLSupport.cpp',
-      'src/windowing/GLX/OgreGLXWindow.cpp',
-    ],
+    ] + select({
+        "//platforms:win32": [
+            #'src/windowing/win32/OgreGL3PlusUtil.h',
+            'src/windowing/win32/OgreWin32Context.cpp',
+            'src/windowing/win32/OgreWin32GLSupport.cpp',
+            'src/windowing/win32/OgreWin32Window.cpp',
+        ],
+        "//conditions:default": [
+            'src/windowing/GLX/OgreGL3PlusUtil.h',
+            'src/windowing/GLX/OgreGLXContext.cpp',
+            'src/windowing/GLX/OgreGLXGLSupport.cpp',
+            'src/windowing/GLX/OgreGLXWindow.cpp',
+        ],
+    }),
     #hdrs = glob([ 'include/*.h', 'include/windowing/*.h', 'include/windowing/GLX/*.h', 'include/Vao/*.h', 'include/GLSL/*.h', 'include/GL/*.h', # Add Windows support here 'src/windowing/GLX/*.h', ]),
 
     hdrs = [
@@ -127,6 +136,7 @@ cc_library(
       #'include/Deprecated/OgreGL3PlusDepthBuffer.h',
     ] + select({
         "//platforms:win32": [
+            'src/windowing/win32/OgreGL3PlusUtil.h',
             'include/windowing/win32/OgreWin32GLSupport.h',
             'include/windowing/win32/OgreWin32Prerequisites.h',
             'include/windowing/win32/OgreWin32Context.h',
@@ -154,6 +164,11 @@ cc_library(
     ] + select ({
         "//platforms:win32": [
             'include/windowing/win32',
+            'src/windowing/win32',
+        ],
+        "//platforms:mac": [
+            'include/windowing/OSX',
+            'src/windowing/OSX',
         ],
         "//conditions:default": [
             'include/windowing/GLX',

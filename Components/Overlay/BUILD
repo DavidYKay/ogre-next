@@ -43,8 +43,13 @@ cc_library(
         "//conditions:default": [],
     }),
     deps = [
-        #'@freetype2',
         '//subprojects/ogre2/OgreMain',
         '//subprojects/ogre2/Components/Hlms/Unlit',
-    ],
-  )
+    ] + select({
+        "//platforms:win32": [ 
+            #"//3rdparty/freetype2",
+            "@freetype2",
+        ],
+        "//conditions:default": [ ],
+    }),
+)

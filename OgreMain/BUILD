@@ -1,5 +1,18 @@
 package(default_visibility = ["//visibility:public"])
 
+load("@io_bazel//src/main/res:win_res.bzl", "windows_resources")
+
+windows_resources(
+    name = "ogre_win_resources",
+    rc_files = [
+        'src/WIN32/OgreWin32Resources.rc',
+    ],
+    resources = [
+        'src/WIN32/ogrelogo.bmp',
+        'src/WIN32/ogre.ico',
+    ],
+)
+
 cc_library(
     name = "OgreMain",
     srcs = [
@@ -242,7 +255,6 @@ cc_library(
       'src/OgreScriptLexer.cpp',
       'src/OgreScriptParser.cpp',
       'src/OgreScriptTranslator.cpp',
-      'src/OgreSearchOps.cpp',
       'src/OgreSerializer.cpp',
       'src/OgreShaderParams.cpp',
       'src/OgreShadowCameraSetup.cpp',
@@ -320,7 +332,20 @@ cc_library(
       'src/stbi/stb_image.h',
       'src/stbi/stb_image_write.h',
     ] + select({
-     "//platforms:linux": [
+        "//platforms:win32": [
+            'src/Threading/OgreThreadsWin.cpp',
+            'src/Threading/OgreLightweightMutexWin.cpp',
+            'src/Threading/OgreBarrierWin.cpp',
+            'src/WIN32/OgreConfigDialog.cpp',
+            'src/WIN32/OgreErrorDialog.cpp',
+            'src/WIN32/OgreFileSystemLayer.cpp',
+            'src/WIN32/OgreOptimisedUtilDirectXMath.cpp',
+            'src/WIN32/OgreTimer.cpp',
+            #'src/WIN32/OgreMinGWSupport.cpp',
+            #'src/WIN32/OgreConfigDialogWinRT.cpp',
+            #'src/WIN32/OgreErrorDialogWinRT.cpp',
+        ],
+        "//conditions:default": [
          'src/GLX/GLX_backdrop.h',
          'src/GLX/OgreConfigDialog.cpp',
          'src/GLX/OgreErrorDialog.cpp',
@@ -329,13 +354,8 @@ cc_library(
          'src/Threading/OgreBarrierPThreads.cpp',
          'src/Threading/OgreThreadsPThreads.cpp',
          'src/Threading/OgreLightweightMutexPThreads.cpp',
+         'src/OgreSearchOps.cpp',
      ],
-     "//platforms:win32": [
-         # Windows
-         'src/Threading/OgreThreadsWin.cpp',
-         'src/Threading/OgreLightweightMutexWin.cpp',
-         'src/Threading/OgreBarrierWin.cpp',
-      ],
     }),
   
     hdrs = [
@@ -843,6 +863,8 @@ cc_library(
     ] + select({
         "//platforms:win32": [
             'hardcoded/win32/OgreBuildSettings.h',
+            #'src/WIN32/OgreWin32Resources.rc',
+            'src/WIN32/resource.h',
             'include/WIN32/OgreComPtr.h',
             'include/WIN32/OgreConfigDialogImp.h',
             'include/WIN32/OgreConfigDialogImpWinRT.h',
@@ -866,7 +888,6 @@ cc_library(
         }),
     includes = [
         "include", 
-        #'include/WIN32',
         #'include/GLX',
         #'include/NaCl',
         #'include/Android',
@@ -901,6 +922,7 @@ cc_library(
         #'include/Compositor/Pass/PassDepthCopy',
     ] + select({
         "//platforms:win32": [
+            #'include/WIN32',
             'hardcoded/win32',
         ],
         "//platforms:linux": [
@@ -913,20 +935,24 @@ cc_library(
     linkopts = select({
         "//platforms:win32": [ ],
         "//conditions:default": [
-            # Unix
             "-lfreeimage",
             "-lX11",
             "-lXt",
             "-lXaw",
             "-lpthread",
-            #"-lzzip",
             "-ldl",
             "-lXrandr",
-            ]
+        ]
     }),
     deps = [
         "//subprojects/ogredeps/src/rapidjson",
         "//subprojects/ogredeps/src/zlib",
         "//subprojects/ogredeps/src/zziplib",
-    ],
+    ] + select({
+        "//platforms:win32": [ 
+            ":ogre_win_resources",
+            "//3rdparty/mccarthy-bindeps/FreeImage",
+        ],
+        "//conditions:default": [ ],
+    }),
 )
