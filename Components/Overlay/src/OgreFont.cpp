@@ -44,7 +44,14 @@ THE SOFTWARE
 #endif
 
 #define generic _generic    // keyword for C++/CX
+
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+// Source dep we are using puts this in root namespace. Leaving it for now.
+#include <ft2build.h>
+#else
 #include <freetype2/ft2build.h>
+#endif
+
 #include FT_FREETYPE_H
 #include FT_GLYPH_H
 #undef generic
