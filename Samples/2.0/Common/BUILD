@@ -84,3 +84,88 @@ cc_library(
         "//conditions:default": [ ],
       })
 )
+
+cc_library(
+    name = 'CommonBoog',
+    srcs = [
+      'src/GameEntityManager.cpp',
+      'src/TutorialGameState.cpp',
+      'src/Utils/MeshUtils.cpp',
+      'src/Utils/ScreenSpaceReflections.cpp',
+      'src/Utils/SmaaUtils.cpp',
+      'src/Utils/TestUtils.cpp',
+      'src/Utils/HdrUtils.cpp',
+      'src/Utils/MiscUtils.cpp',
+      'src/SdlInputHandler.cpp',
+
+      #'src/System/Desktop/MainLoopMultiThreaded.cpp',
+      'src/System/Desktop/MainLoopSingleThreaded.cpp',
+
+      # 'src/System/iOS/GameViewController.mm',
+      # 'src/System/iOS/Resources/Main.storyboard',
+      # 'src/System/iOS/Resources/Info.plist',
+      # 'src/System/iOS/iOSUtils.mm',
+      # 'src/System/iOS/AppDelegate.mm',
+      # 'src/System/OSX/OSXUtils.mm',
+      # 'src/System/OSX/Resources/Info.plist',
+      'src/System/MainEntryPoints.cpp',
+      'src/System/StaticPluginLoader.cpp',
+      'src/CameraController.cpp',
+      'src/Threading/MessageQueueSystem.cpp',
+      'src/BaseSystem.cpp',
+      'src/LogicSystem.cpp',
+      'src/GraphicsSystem.cpp',
+    ],
+    hdrs = [
+      'include/BaseSystem.h',
+      'include/CameraController.h',
+      'include/GameEntity.h',
+      'include/GameEntityManager.h',
+      'include/GameState.h',
+      'include/GraphicsSystem.h',
+      'include/InputListeners.h',
+      'include/LogicSystem.h',
+      'include/MainEntryPointHelper.h',
+      'include/SdlEmulationLayer.h',
+      'include/SdlInputHandler.h',
+      'include/System/MainEntryPoints.h',
+      'include/System/OSX/OSXUtils.h',
+      'include/System/StaticPluginLoader.h',
+      'include/System/iOS/AppDelegate.h',
+      'include/System/iOS/GameViewController.h',
+      'include/System/iOS/iOSUtils.h',
+      'include/Threading/MessageQueueSystem.h',
+      'include/Threading/MqMessages.h',
+      'include/Threading/YieldTimer.h',
+      'include/TutorialGameState.h',
+      'include/Utils/HdrUtils.h',
+      'include/Utils/MeshUtils.h',
+      'include/Utils/MiscUtils.h',
+      'include/Utils/ScreenSpaceReflections.h',
+      'include/Utils/SmaaUtils.h',
+      'include/Utils/TestUtils.h',
+    ],
+    includes = [
+        'include',
+    ],
+    copts = select({
+        "//platforms:win32": [ ],
+        "//conditions:default": [
+            '-I/usr/include/SDL2'
+        ],
+    }),
+    deps = [
+      '//subprojects/ogre2/OgreMain',
+      '//subprojects/ogre2/Components/Hlms/Unlit',
+      '//subprojects/ogre2/Components/Hlms/Pbs',
+      '//subprojects/ogre2/Components/Overlay',
+      '//subprojects/ogre2/RenderSystems/GL3Plus',
+      ] + select({
+        "//platforms:win32": [ 
+          #'//3rdparty/SDL2',
+          #'//subprojects/ogredeps/src/SDL2',
+          '@SDL2',
+        ],
+        "//conditions:default": [ ],
+      })
+)
