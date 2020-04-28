@@ -680,7 +680,8 @@ namespace Demo
         Ogre::String rootHlmsFolder = Ogre::macBundlePath() + '/' +
                                   cf.getSetting( "DoNotUseAsResource", "Hlms", "" );
 #else
-        Ogre::String rootHlmsFolder = mResourcePath + cf.getSetting( "DoNotUseAsResource", "Hlms", "" );
+        //Ogre::String rootHlmsFolder = mResourcePath + cf.getSetting( "DoNotUseAsResource", "Hlms", "" );
+        Ogre::String rootHlmsFolder =  cf.getSetting( "DoNotUseAsResource", "Hlms", "" );
 #endif
 
         if( rootHlmsFolder.empty() )
