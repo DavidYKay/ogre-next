@@ -15,9 +15,16 @@
 
 namespace Demo
 {
+#ifndef CONSOLIDATE_DEMO_INPUT_LISTENERS
     class MouseListener;
     class KeyboardListener;
     class JoystickListener;
+#else
+    class InputListener;
+    typedef InputListener MouseListener;
+    typedef InputListener KeyboardListener;
+    typedef InputListener JoystickListener;
+#endif
 
     class SdlInputHandler
     {

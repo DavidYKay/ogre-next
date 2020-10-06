@@ -6,7 +6,11 @@
 
 namespace Demo
 {
+#ifndef CONSOLIDATE_DEMO_INPUT_LISTENERS
     class GameState : public MouseListener, public KeyboardListener, public JoystickListener
+#else
+    class GameState : public InputListener
+#endif
     {
     public:
         virtual ~GameState() {}

@@ -15,6 +15,7 @@ struct SDL_JoyHatEvent;
 
 namespace Demo
 {
+#ifndef CONSOLIDATE_DEMO_INPUT_LISTENERS
     class MouseListener
     {
     public:
@@ -41,6 +42,31 @@ namespace Demo
         virtual void joyAxisMoved( const SDL_JoyAxisEvent &arg, int axis ) {}
         virtual void joyPovMoved( const SDL_JoyHatEvent &arg, int index ) {}
     };
+#else
+    class InputListener
+    {
+    public:
+        //Receives SDL_MOUSEMOTION and SDL_MOUSEWHEEL events
+        virtual void mouseMoved( const SDL_Event &arg ) {}
+        virtual void mousePressed( const SDL_MouseButtonEvent &arg, Ogre::uint8 id ) {}
+        virtual void mouseReleased( const SDL_MouseButtonEvent &arg, Ogre::uint8 id ) {}
+
+    public:
+        virtual void textEditing( const SDL_TextEditingEvent& arg ) {}
+        virtual void textInput( const SDL_TextInputEvent& arg ) {}
+        virtual void keyPressed( const SDL_KeyboardEvent &arg ) {}
+        virtual void keyReleased (const SDL_KeyboardEvent &arg ) {}
+
+    public:
+        virtual void joyButtonPressed( const SDL_JoyButtonEvent &evt, int button ) {}
+        virtual void joyButtonReleased( const SDL_JoyButtonEvent &evt, int button ) {}
+        virtual void joyAxisMoved( const SDL_JoyAxisEvent &arg, int axis ) {}
+        virtual void joyPovMoved( const SDL_JoyHatEvent &arg, int index ) {}
+    };
+    typedef InputListener MouseListener;
+    typedef InputListener KeyboardListener;
+    typedef InputListener JoystickListener;
+#endif
 }
 
 #endif

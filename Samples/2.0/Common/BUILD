@@ -82,7 +82,10 @@ cc_library(
           '@SDL2',
         ],
         "//conditions:default": [ ],
-      })
+    }),
+    defines = [
+      'CONSOLIDATE_DEMO_INPUT_LISTENERS',
+    ],
 )
 
 cc_library(
@@ -166,7 +169,10 @@ cc_library(
           '@SDL2',
         ],
         "//conditions:default": [ ],
-      }),
+    }),
+    defines = [
+      'CONSOLIDATE_DEMO_INPUT_LISTENERS',
+    ],
 )
 
 cc_library(
